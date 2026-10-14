@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Datenschutzerklärung · raus aus dem gift</title>
+  <meta name="description" content="Datenschutzerklärung von raus aus dem gift – Informationen zur Verarbeitung personenbezogener Daten gemäß DSGVO.">
+  <meta name="robots" content="noindex, follow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --plum:        #4A2C3D;
+      --plum-soft:   #6B4A5D;
+      --mauve:       #8A6275;
+      --cream:       #FBF4F0;
+      --powder:      #F3E6E1;
+      --powder-2:    #EEDFD9;
+      --line:        #E6D0D8;
+      --line-2:      #D9C3CB;
+      --rose:        #EBC3BA;
+      --berry:       #B8565A;
+      --berry-hover: #A44B50;
+
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans:  'Jost', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      font-weight: 400;
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--plum);
+      background: var(--cream);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--berry); text-decoration: underline; }
+    a:hover { color: var(--berry-hover); }
+
+    /* NAV */
+    .nav {
+      background: var(--cream);
+      border-bottom: 1px solid var(--line);
+      padding: 0 22px;
+    }
+
+    .nav__inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--plum);
+      flex-shrink: 0;
+    }
+
+    .logo__text {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 500;
+      font-style: italic;
+    }
+
+    .nav__back {
+      font-size: 14px;
+      color: var(--plum-soft);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 44px;
+    }
+
+    .nav__back:hover { color: var(--plum); }
+    .nav__back::before { content: "←"; font-size: 16px; }
+
+    /* HERO */
+    .hero {
+      background: var(--plum);
+      padding: 56px 22px 64px;
+    }
+
+    .hero__inner { max-width: 1100px; margin: 0 auto; }
+
+    .label {
+      font-size: 12px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--rose);
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(38px, 7vw, 56px);
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1.02;
+      text-transform: lowercase;
+      color: var(--cream);
+    }
+
+    .hero__sub {
+      color: var(--line);
+      font-size: 15px;
+      margin-top: 14px;
+    }
+
+    /* TOC */
+    .toc {
+      background: var(--powder);
+      padding: 36px 22px;
+    }
+
+    .toc__inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .toc__label {
+      font-size: 12px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--plum-soft);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .toc__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .toc__list li {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .toc__list li:first-child { border-top: 1px solid var(--line); }
+
+    .toc__list a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      font-size: 15px;
+      color: var(--plum);
+      text-decoration: none;
+      gap: 12px;
+      min-height: 44px;
+    }
+
+    .toc__list a:hover { color: var(--berry); }
+
+    .toc__list a::after {
+      content: "↓";
+      font-size: 14px;
+      color: var(--mauve);
+      flex-shrink: 0;
+    }
+
+    /* CONTENT */
+    .content { padding: 72px 22px 80px; }
+
+    .content__inner { max-width: 720px; margin: 0 auto; }
+
+    .imp-section { margin-bottom: 56px; }
+    .imp-section:last-child { margin-bottom: 0; }
+
+    .imp-section h2 {
+      font-family: var(--font-serif);
+      font-size: 26px;
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1.1;
+      text-transform: lowercase;
+      color: var(--plum);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .imp-section h3 {
+      font-family: var(--font-sans);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--plum);
+      margin: 24px 0 8px;
+    }
+
+    .imp-section p {
+      color: var(--plum-soft);
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 12px;
+      max-width: 62ch;
+      text-wrap: pretty;
+    }
+
+    .imp-section p:last-child { margin-bottom: 0; }
+
+    .imp-section ul, .imp-section ol {
+      padding-left: 20px;
+      margin-bottom: 12px;
+    }
+
+    .imp-section li {
+      color: var(--plum-soft);
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 6px;
+    }
+
+    .imp-section address {
+      font-style: normal;
+      color: var(--plum-soft);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .imp-section address strong {
+      font-weight: 500;
+      color: var(--plum);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .info-box {
+      background: var(--powder);
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin: 16px 0;
+    }
+
+    .info-box p {
+      font-size: 15px;
+      margin-bottom: 0;
+    }
+
+    .placeholder {
+      background: var(--powder-2);
+      border: 1px dashed var(--mauve);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 14px;
+      color: var(--mauve);
+      display: inline-block;
+      margin-top: 8px;
+    }
+
+    /* FOOTER */
+    .footer {
+      background: var(--plum);
+      padding: 64px 22px 48px;
+    }
+
+    .footer__inner { max-width: 1100px; margin: 0 auto; }
+
+    .footer__logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--cream);
+      text-decoration: none;
+      margin-bottom: 36px;
+    }
+
+    .footer__logo-text {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 500;
+      font-style: italic;
+    }
+
+    .footer__help {
+      font-size: 13px;
+      color: var(--line);
+      max-width: 680px;
+      margin-bottom: 36px;
+      line-height: 1.6;
+    }
+
+    .footer__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+      margin-bottom: 48px;
+    }
+
+    .footer__links a {
+      font-size: 14px;
+      color: var(--line);
+      text-decoration: none;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .footer__links a:hover { color: var(--cream); }
+
+    .footer__tagline {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 500;
+      font-style: italic;
+      color: var(--rose);
+      border-top: 1px solid var(--plum-soft);
+      padding-top: 28px;
+    }
+
+    @media (max-width: 480px) {
+      .logo__text { font-size: 17px; }
+      .content { padding: 56px 22px 64px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" aria-label="Hauptnavigation">
+    <div class="nav__inner">
+      <a href="/" class="logo" aria-label="raus aus dem gift – zurück zur Startseite">
+        <svg viewBox="0 0 100 60" width="38" height="23" fill="none" stroke-linecap="round" aria-hidden="true">
+          <path d="M14 50H86" stroke="currentColor" stroke-width="4"/>
+          <path d="M30 50A20 20 0 0 1 62 34" stroke="currentColor" stroke-width="4"/>
+          <circle cx="72" cy="20" r="6.5" fill="#EBC3BA"/>
+        </svg>
+        <span class="logo__text">raus aus dem gift</span>
+      </a>
+      <a href="/" class="nav__back">Zurück</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero__inner">
+      <span class="label">Rechtliches</span>
+      <h1>datenschutzerklärung</h1>
+      <p class="hero__sub">Stand: Oktober 2024 · Verantwortliche: Verena Maria</p>
+    </div>
+  </header>
+
+  <!-- TOC -->
+  <nav class="toc" aria-label="Inhaltsverzeichnis">
+    <div class="toc__inner">
+      <span class="toc__label">Inhalt</span>
+      <ol class="toc__list">
+        <li><a href="#verantwortliche">1. Verantwortliche</a></li>
+        <li><a href="#grundsaetze">2. Grundsätze der Datenverarbeitung</a></li>
+        <li><a href="#hosting">3. Hosting</a></li>
+        <li><a href="#newsletter">4. Newsletter Morgenlicht (Brevo)</a></li>
+        <li><a href="#keine-cookies">5. Cookies und Tracking</a></li>
+        <li><a href="#externe-links">6. Externe Links</a></li>
+        <li><a href="#ssl">7. SSL-/TLS-Verschlüsselung</a></li>
+        <li><a href="#rechte">8. Deine Rechte</a></li>
+        <li><a href="#behoerde">9. Beschwerderecht bei der Aufsichtsbehörde</a></li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- CONTENT -->
+  <main class="content">
+    <div class="content__inner">
+
+      <!-- 1. VERANTWORTLICHE -->
+      <section class="imp-section" id="verantwortliche" aria-labelledby="h-verantwortliche">
+        <h2 id="h-verantwortliche">1. verantwortliche</h2>
+        <p>Verantwortliche im Sinne der Datenschutz-Grundverordnung (DSGVO) und anderer nationaler Datenschutzgesetze sowie sonstiger datenschutzrechtlicher Bestimmungen ist:</p>
+        <address>
+          <strong>Verena Maria</strong>
+          Kleinschwand 70<br>
+          92723 Tännesberg<br>
+          Deutschland<br><br>
+          Telefon: <a href="tel:+4915115524681">0151 15524681</a><br>
+          E-Mail: <a href="mailto:mail@rausausdemgift.de">mail@rausausdemgift.de</a>
+        </address>
+      </section>
+
+      <!-- 2. GRUNDSÄTZE -->
+      <section class="imp-section" id="grundsaetze" aria-labelledby="h-grundsaetze">
+        <h2 id="h-grundsaetze">2. grundsätze der datenverarbeitung</h2>
+        <p>
+          Ich nehme den Schutz deiner persönlichen Daten ernst. Diese Datenschutzerklärung informiert dich darüber, welche personenbezogenen Daten ich erhebe, wie ich sie verarbeite und welche Rechte du hast.
+        </p>
+        <p>
+          Personenbezogene Daten sind alle Informationen, mit denen du persönlich identifiziert werden kannst (z. B. Name, E-Mail-Adresse). Ich erhebe auf dieser Website nur die Daten, die für den jeweiligen Zweck unbedingt notwendig sind.
+        </p>
+        <p>
+          Rechtsgrundlage für die Verarbeitung ist in der Regel deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Du kannst eine erteilte Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen.
+        </p>
+      </section>
+
+      <!-- 3. HOSTING -->
+      <section class="imp-section" id="hosting" aria-labelledby="h-hosting">
+        <h2 id="h-hosting">3. hosting</h2>
+        <p>
+          Diese Website wird bei einem externen Hosting-Anbieter betrieben. Beim Besuch der Seite verarbeitet der Hosting-Anbieter automatisch sogenannte Server-Log-Dateien. Diese enthalten:
+        </p>
+        <ul>
+          <li>Browsertyp und -version</li>
+          <li>verwendetes Betriebssystem</li>
+          <li>Referrer-URL (zuvor besuchte Seite)</li>
+          <li>Hostname des zugreifenden Rechners</li>
+          <li>Uhrzeit der Serveranfrage</li>
+          <li>IP-Adresse</li>
+        </ul>
+        <p>
+          Diese Daten werden nicht mit anderen Datenquellen zusammengeführt. Die Erfassung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am technisch fehlerfreien Betrieb der Website). Server-Log-Dateien werden nach spätestens 30 Tagen gelöscht.
+        </p>
+        <div class="info-box">
+          <p>
+            <strong>Hosting-Anbieter:</strong> GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA (GitHub Pages). Mit GitHub besteht ein Auftragsverarbeitungsvertrag (Data Processing Agreement). Weitere Informationen: <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub Privacy Statement</a>.
+          </p>
+        </div>
+      </section>
+
+      <!-- 4. NEWSLETTER -->
+      <section class="imp-section" id="newsletter" aria-labelledby="h-newsletter">
+        <h2 id="h-newsletter">4. newsletter morgenlicht (brevo)</h2>
+
+        <h3>Was wird erhoben?</h3>
+        <p>
+          Wenn du dich für meinen Newsletter <em>Morgenlicht</em> anmeldest, erhebe ich folgende Daten:
+        </p>
+        <ul>
+          <li>Vorname</li>
+          <li>E-Mail-Adresse</li>
+          <li>Datum und Uhrzeit der Anmeldung</li>
+          <li>IP-Adresse zum Zeitpunkt der Anmeldung</li>
+        </ul>
+
+        <h3>Wofür werden die Daten verwendet?</h3>
+        <p>
+          Deine Daten werden ausschließlich verwendet, um dir den Newsletter Morgenlicht zuzusenden. Ich gebe sie nicht an Dritte weiter und nutze sie nicht für Werbung Dritter.
+        </p>
+
+        <h3>Rechtsgrundlage</h3>
+        <p>
+          Grundlage der Verarbeitung ist deine ausdrückliche Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO, die du mit dem Abschicken des Anmeldeformulars erteilst.
+        </p>
+
+        <h3>Double-Opt-In</h3>
+        <p>
+          Ich nutze das Double-Opt-In-Verfahren: Nach deiner Anmeldung erhältst du eine Bestätigungsmail. Erst wenn du auf den enthaltenen Link klickst, wird deine Anmeldung aktiviert. So wird sichergestellt, dass keine fremde E-Mail-Adresse eingetragen wird.
+        </p>
+
+        <h3>Widerruf</h3>
+        <p>
+          Du kannst deine Einwilligung jederzeit widerrufen und dich vom Newsletter abmelden – über den Abmeldelink in jeder E-Mail oder per Nachricht an <a href="mailto:mail@rausausdemgift.de">mail@rausausdemgift.de</a>. Nach dem Widerruf werden deine Daten aus dem Verteiler gelöscht.
+        </p>
+
+        <h3>Dienstleister: Brevo (ehemals Sendinblue)</h3>
+        <p>
+          Der Versand des Newsletters erfolgt über den Dienst Brevo (Sendinblue SAS, 106 Boulevard Haussmann, 75008 Paris, Frankreich). Brevo verarbeitet deine Daten auf europäischen Servern im Auftrag und nach meiner Weisung. Mit Brevo besteht ein Auftragsverarbeitungsvertrag gemäß Art. 28 DSGVO.
+        </p>
+        <p>
+          Weitere Informationen zum Datenschutz bei Brevo: <a href="https://www.brevo.com/de/datenschutz-und-sicherheit/" target="_blank" rel="noopener noreferrer">brevo.com/de/datenschutz-und-sicherheit</a>
+        </p>
+
+        <h3>Speicherdauer</h3>
+        <p>
+          Deine Daten werden gespeichert, solange du den Newsletter abonnierst. Nach einer Abmeldung werden deine Daten innerhalb von 30 Tagen gelöscht, sofern keine gesetzlichen Aufbewahrungspflichten entgegenstehen.
+        </p>
+      </section>
+
+      <!-- 5. COOKIES -->
+      <section class="imp-section" id="keine-cookies" aria-labelledby="h-cookies">
+        <h2 id="h-cookies">5. cookies und tracking</h2>
+        <p>
+          Diese Website verwendet <strong>keine Tracking-Cookies</strong>, kein Google Analytics und keine sonstigen Analyse- oder Tracking-Dienste. Es werden keine Nutzerprofile erstellt.
+        </p>
+        <p>
+          Technisch notwendige Cookies (z. B. für Formulare) werden nur dann gesetzt, wenn sie für den Betrieb der Seite unbedingt erforderlich sind. Ein Cookie-Banner ist daher nicht nötig.
+        </p>
+      </section>
+
+      <!-- 6. EXTERNE LINKS -->
+      <section class="imp-section" id="externe-links" aria-labelledby="h-links">
+        <h2 id="h-links">6. externe links</h2>
+        <p>
+          Diese Website enthält Links zu externen Angeboten (z. B. Instagram, Behörden-Websites). Für die Inhalte und die Datenschutzpraktiken dieser externen Seiten bin ich nicht verantwortlich. Beim Anklicken eines externen Links verlässt du den Datenschutzbereich dieser Website.
+        </p>
+      </section>
+
+      <!-- 7. SSL -->
+      <section class="imp-section" id="ssl" aria-labelledby="h-ssl">
+        <h2 id="h-ssl">7. ssl-/tls-verschlüsselung</h2>
+        <p>
+          Diese Website nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte eine SSL-/TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennst du daran, dass die Adresszeile des Browsers von „http://" auf „https://" wechselt und an dem Schloss-Symbol in der Browserzeile.
+        </p>
+        <p>
+          Wenn die SSL-/TLS-Verschlüsselung aktiviert ist, können die Daten, die du an mich übermittelst, nicht von Dritten mitgelesen werden.
+        </p>
+      </section>
+
+      <!-- 8. RECHTE -->
+      <section class="imp-section" id="rechte" aria-labelledby="h-rechte">
+        <h2 id="h-rechte">8. deine rechte</h2>
+        <p>Du hast gegenüber mir folgende Rechte hinsichtlich deiner personenbezogenen Daten:</p>
+
+        <h3>Auskunft (Art. 15 DSGVO)</h3>
+        <p>Du kannst jederzeit Auskunft darüber verlangen, ob und welche Daten ich über dich gespeichert habe.</p>
+
+        <h3>Berichtigung (Art. 16 DSGVO)</h3>
+        <p>Du hast das Recht, unrichtige oder unvollständige Daten berichtigen zu lassen.</p>
+
+        <h3>Löschung (Art. 17 DSGVO)</h3>
+        <p>Du kannst die Löschung deiner gespeicherten Daten verlangen, sofern keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</p>
+
+        <h3>Einschränkung der Verarbeitung (Art. 18 DSGVO)</h3>
+        <p>Du kannst verlangen, dass die Verarbeitung deiner Daten eingeschränkt wird.</p>
+
+        <h3>Widerspruch (Art. 21 DSGVO)</h3>
+        <p>Du kannst der Verarbeitung deiner Daten jederzeit widersprechen, sofern die Verarbeitung auf einem berechtigten Interesse beruht.</p>
+
+        <h3>Datenübertragbarkeit (Art. 20 DSGVO)</h3>
+        <p>Du hast das Recht, deine Daten in einem strukturierten, gängigen und maschinenlesbaren Format zu erhalten.</p>
+
+        <h3>Widerruf einer Einwilligung</h3>
+        <p>Wenn du eine Einwilligung erteilt hast, kannst du diese jederzeit mit Wirkung für die Zukunft widerrufen – ohne Angabe von Gründen.</p>
+
+        <div class="info-box">
+          <p>
+            Um deine Rechte auszuüben, wende dich einfach per E-Mail an mich: <a href="mailto:mail@rausausdemgift.de">mail@rausausdemgift.de</a>
+          </p>
+        </div>
+      </section>
+
+      <!-- 9. BEHÖRDE -->
+      <section class="imp-section" id="behoerde" aria-labelledby="h-behoerde">
+        <h2 id="h-behoerde">9. beschwerderecht bei der aufsichtsbehörde</h2>
+        <p>
+          Du hast das Recht, dich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung deiner personenbezogenen Daten zu beschweren. Die zuständige Aufsichtsbehörde für Bayern ist:
+        </p>
+        <address>
+          <strong>Bayerisches Landesamt für Datenschutzaufsicht (BayLDA)</strong>
+          Promenade 18<br>
+          91522 Ansbach<br><br>
+          Telefon: <a href="tel:+499813800093">0981 38 00 093</a><br>
+          E-Mail: <a href="mailto:poststelle@lda.bayern.de">poststelle@lda.bayern.de</a><br>
+          Website: <a href="https://www.lda.bayern.de" target="_blank" rel="noopener noreferrer">www.lda.bayern.de</a>
+        </address>
+        <p style="margin-top: 16px;">
+          Quelle: <a href="https://www.e-recht24.de" target="_blank" rel="noopener noreferrer">eRecht24</a>
+        </p>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <a href="/" class="footer__logo" aria-label="raus aus dem gift">
+        <svg viewBox="0 0 100 60" width="38" height="23" fill="none" stroke-linecap="round" aria-hidden="true">
+          <path d="M14 50H86" stroke="currentColor" stroke-width="4"/>
+          <path d="M30 50A20 20 0 0 1 62 34" stroke="currentColor" stroke-width="4"/>
+          <circle cx="72" cy="20" r="6.5" fill="#EBC3BA"/>
+        </svg>
+        <span class="footer__logo-text">raus aus dem gift</span>
+      </a>
+
+      <p class="footer__help">
+        Diese Inhalte ersetzen keine rechtliche, psychologische oder therapeutische Beratung. Bei Gewalt oder akuter Gefahr: Polizei 110 · Hilfetelefon Gewalt gegen Frauen 116 016 · Hilfetelefon Gewalt an Männern 0800 1239900 · Nummer gegen Kummer, Elterntelefon 0800 111 0 550.
+      </p>
+
+      <nav class="footer__links" aria-label="Rechtliche Links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+      </nav>
+
+      <p class="footer__tagline">es war nie zu viel von dir. es war zu viel gift.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
