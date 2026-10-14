@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impressum · raus aus dem gift</title>
+  <meta name="description" content="Impressum von raus aus dem gift – Angaben gemäß § 5 TMG.">
+  <meta name="robots" content="noindex, follow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --plum:        #4A2C3D;
+      --plum-soft:   #6B4A5D;
+      --mauve:       #8A6275;
+      --cream:       #FBF4F0;
+      --powder:      #F3E6E1;
+      --powder-2:    #EEDFD9;
+      --line:        #E6D0D8;
+      --line-2:      #D9C3CB;
+      --rose:        #EBC3BA;
+      --berry:       #B8565A;
+      --berry-hover: #A44B50;
+
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans:  'Jost', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      font-weight: 400;
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--plum);
+      background: var(--cream);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--berry); text-decoration: underline; }
+    a:hover { color: var(--berry-hover); }
+
+    /* NAV */
+    .nav {
+      background: var(--cream);
+      border-bottom: 1px solid var(--line);
+      padding: 0 22px;
+    }
+
+    .nav__inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--plum);
+      flex-shrink: 0;
+    }
+
+    .logo__text {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 500;
+      font-style: italic;
+    }
+
+    .nav__back {
+      font-size: 14px;
+      color: var(--plum-soft);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 44px;
+    }
+
+    .nav__back:hover { color: var(--plum); }
+
+    .nav__back::before {
+      content: "←";
+      font-size: 16px;
+    }
+
+    /* HERO */
+    .hero {
+      background: var(--plum);
+      padding: 56px 22px 64px;
+    }
+
+    .hero__inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .label {
+      font-size: 12px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--rose);
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(38px, 7vw, 56px);
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1.02;
+      text-transform: lowercase;
+      color: var(--cream);
+    }
+
+    /* CONTENT */
+    .content {
+      padding: 72px 22px 80px;
+    }
+
+    .content__inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* SECTIONS */
+    .imp-section {
+      margin-bottom: 48px;
+    }
+
+    .imp-section:last-child { margin-bottom: 0; }
+
+    .imp-section h2 {
+      font-family: var(--font-serif);
+      font-size: 26px;
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1.1;
+      text-transform: lowercase;
+      color: var(--plum);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .imp-section p {
+      color: var(--plum-soft);
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 12px;
+      max-width: 62ch;
+      text-wrap: pretty;
+    }
+
+    .imp-section p:last-child { margin-bottom: 0; }
+
+    .imp-section address {
+      font-style: normal;
+      color: var(--plum-soft);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .imp-section address strong {
+      font-weight: 500;
+      color: var(--plum);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .contact-list {
+      list-style: none;
+      margin-top: 16px;
+    }
+
+    .contact-list li {
+      display: flex;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--powder);
+      font-size: 16px;
+      color: var(--plum-soft);
+      align-items: center;
+    }
+
+    .contact-list li:first-child { border-top: 1px solid var(--powder); }
+
+    .contact-list__label {
+      font-weight: 500;
+      color: var(--plum);
+      min-width: 80px;
+      font-size: 14px;
+    }
+
+    .placeholder {
+      background: var(--powder-2);
+      border: 1px dashed var(--mauve);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 14px;
+      color: var(--mauve);
+      display: inline-block;
+      margin-top: 8px;
+    }
+
+    /* FOOTER */
+    .footer {
+      background: var(--plum);
+      padding: 64px 22px 48px;
+    }
+
+    .footer__inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .footer__logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--cream);
+      text-decoration: none;
+      margin-bottom: 36px;
+    }
+
+    .footer__logo-text {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 500;
+      font-style: italic;
+    }
+
+    .footer__help {
+      font-size: 13px;
+      color: var(--line);
+      max-width: 680px;
+      margin-bottom: 36px;
+      line-height: 1.6;
+    }
+
+    .footer__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+      margin-bottom: 48px;
+    }
+
+    .footer__links a {
+      font-size: 14px;
+      color: var(--line);
+      text-decoration: none;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .footer__links a:hover { color: var(--cream); }
+
+    .footer__tagline {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 500;
+      font-style: italic;
+      color: var(--rose);
+      border-top: 1px solid var(--plum-soft);
+      padding-top: 28px;
+    }
+
+    @media (max-width: 480px) {
+      .logo__text { font-size: 17px; }
+      .content { padding: 56px 22px 64px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" aria-label="Hauptnavigation">
+    <div class="nav__inner">
+      <a href="/" class="logo" aria-label="raus aus dem gift – zurück zur Startseite">
+        <svg viewBox="0 0 100 60" width="38" height="23" fill="none" stroke-linecap="round" aria-hidden="true">
+          <path d="M14 50H86" stroke="currentColor" stroke-width="4"/>
+          <path d="M30 50A20 20 0 0 1 62 34" stroke="currentColor" stroke-width="4"/>
+          <circle cx="72" cy="20" r="6.5" fill="#EBC3BA"/>
+        </svg>
+        <span class="logo__text">raus aus dem gift</span>
+      </a>
+      <a href="/" class="nav__back">Zurück</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero__inner">
+      <span class="label">Rechtliches</span>
+      <h1>impressum</h1>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="content">
+    <div class="content__inner">
+
+      <!-- § 5 TMG -->
+      <section class="imp-section" aria-labelledby="anbieter">
+        <h2 id="anbieter">angaben gemäß § 5 tmg</h2>
+        <address>
+          <strong>Verena Maria</strong>
+          Kleinschwand 70<br>
+          92723 Tännesberg<br>
+          Deutschland
+        </address>
+      </section>
+
+      <!-- KONTAKT -->
+      <section class="imp-section" aria-labelledby="kontakt">
+        <h2 id="kontakt">kontakt</h2>
+        <ul class="contact-list">
+          <li>
+            <span class="contact-list__label">Telefon</span>
+            <a href="tel:+4915115524681">0151 15524681</a>
+          </li>
+          <li>
+            <span class="contact-list__label">E-Mail</span>
+            <a href="mailto:mail@rausausdemgift.de">mail@rausausdemgift.de</a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- STEUERNUMMER -->
+      <section class="imp-section" aria-labelledby="steuer">
+        <h2 id="steuer">steuernummer</h2>
+        <p>Steuernummer gemäß § 21 Umsatzsteuergesetz (UStG):</p>
+        <span class="placeholder">[Steuernummer des zuständigen Finanzamts eintragen]</span>
+      </section>
+
+      <!-- INHALTLICH VERANTWORTLICH -->
+      <section class="imp-section" aria-labelledby="verantwortlich">
+        <h2 id="verantwortlich">verantwortlich für den inhalt nach § 18 abs. 2 mstv</h2>
+        <address>
+          Verena Maria<br>
+          Kleinschwand 70<br>
+          92723 Tännesberg
+        </address>
+      </section>
+
+      <!-- EU-STREITSCHLICHTUNG -->
+      <section class="imp-section" aria-labelledby="odr">
+        <h2 id="odr">eu-streitschlichtung</h2>
+        <p>
+          Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+          <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">
+            https://ec.europa.eu/consumers/odr/
+          </a>
+        </p>
+        <p>Meine E-Mail-Adresse findest du oben im Impressum.</p>
+      </section>
+
+      <!-- VERBRAUCHERSTREITBEILEGUNG -->
+      <section class="imp-section" aria-labelledby="streit">
+        <h2 id="streit">verbraucherstreitbeilegung</h2>
+        <p>
+          Ich bin nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+        </p>
+      </section>
+
+      <!-- HAFTUNG FÜR INHALTE -->
+      <section class="imp-section" aria-labelledby="haftung-inhalte">
+        <h2 id="haftung-inhalte">haftung für inhalte</h2>
+        <p>
+          Als Diensteanbieter bin ich gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG bin ich als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+        </p>
+        <p>
+          Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werde ich diese Inhalte umgehend entfernen.
+        </p>
+      </section>
+
+      <!-- HAFTUNG FÜR LINKS -->
+      <section class="imp-section" aria-labelledby="haftung-links">
+        <h2 id="haftung-links">haftung für links</h2>
+        <p>
+          Mein Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte ich keinen Einfluss habe. Deshalb kann ich für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
+        </p>
+        <p>
+          Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werde ich derartige Links umgehend entfernen.
+        </p>
+      </section>
+
+      <!-- URHEBERRECHT -->
+      <section class="imp-section" aria-labelledby="urheberrecht">
+        <h2 id="urheberrecht">urheberrecht</h2>
+        <p>
+          Die durch die Seitenbetreiberin erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung der jeweiligen Autorin bzw. Erstellerin.
+        </p>
+        <p>
+          Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht von der Betreiberin erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Solltest du trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitte ich um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werde ich derartige Inhalte umgehend entfernen.
+        </p>
+        <p>
+          Quelle: <a href="https://www.e-recht24.de" target="_blank" rel="noopener noreferrer">eRecht24</a>
+        </p>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <a href="/" class="footer__logo" aria-label="raus aus dem gift">
+        <svg viewBox="0 0 100 60" width="38" height="23" fill="none" stroke-linecap="round" aria-hidden="true">
+          <path d="M14 50H86" stroke="currentColor" stroke-width="4"/>
+          <path d="M30 50A20 20 0 0 1 62 34" stroke="currentColor" stroke-width="4"/>
+          <circle cx="72" cy="20" r="6.5" fill="#EBC3BA"/>
+        </svg>
+        <span class="footer__logo-text">raus aus dem gift</span>
+      </a>
+
+      <p class="footer__help">
+        Diese Inhalte ersetzen keine rechtliche, psychologische oder therapeutische Beratung. Bei Gewalt oder akuter Gefahr: Polizei 110 · Hilfetelefon Gewalt gegen Frauen 116 016 · Hilfetelefon Gewalt an Männern 0800 1239900 · Nummer gegen Kummer, Elterntelefon 0800 111 0 550.
+      </p>
+
+      <nav class="footer__links" aria-label="Rechtliche Links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+      </nav>
+
+      <p class="footer__tagline">es war nie zu viel von dir. es war zu viel gift.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
