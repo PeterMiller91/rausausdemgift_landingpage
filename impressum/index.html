@@ -47,7 +47,6 @@
     a { color: var(--berry); text-decoration: underline; }
     a:hover { color: var(--berry-hover); }
 
-    /* NAV */
     .nav {
       background: var(--cream);
       border-bottom: 1px solid var(--line);
@@ -91,22 +90,14 @@
     }
 
     .nav__back:hover { color: var(--plum); }
+    .nav__back::before { content: "←"; font-size: 16px; }
 
-    .nav__back::before {
-      content: "←";
-      font-size: 16px;
-    }
-
-    /* HERO */
     .hero {
       background: var(--plum);
       padding: 56px 22px 64px;
     }
 
-    .hero__inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+    .hero__inner { max-width: 1100px; margin: 0 auto; }
 
     .label {
       font-size: 12px;
@@ -127,21 +118,10 @@
       color: var(--cream);
     }
 
-    /* CONTENT */
-    .content {
-      padding: 72px 22px 80px;
-    }
+    .content { padding: 72px 22px 80px; }
+    .content__inner { max-width: 720px; margin: 0 auto; }
 
-    .content__inner {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    /* SECTIONS */
-    .imp-section {
-      margin-bottom: 48px;
-    }
-
+    .imp-section { margin-bottom: 48px; }
     .imp-section:last-child { margin-bottom: 0; }
 
     .imp-section h2 {
@@ -182,10 +162,7 @@
       margin-bottom: 4px;
     }
 
-    .contact-list {
-      list-style: none;
-      margin-top: 16px;
-    }
+    .contact-list { list-style: none; margin-top: 16px; }
 
     .contact-list li {
       display: flex;
@@ -217,16 +194,12 @@
       margin-top: 8px;
     }
 
-    /* FOOTER */
     .footer {
       background: var(--plum);
       padding: 64px 22px 48px;
     }
 
-    .footer__inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+    .footer__inner { max-width: 1100px; margin: 0 auto; }
 
     .footer__logo {
       display: flex;
@@ -288,7 +261,6 @@
 </head>
 <body>
 
-  <!-- NAV -->
   <nav class="nav" aria-label="Hauptnavigation">
     <div class="nav__inner">
       <a href="/" class="logo" aria-label="raus aus dem gift – zurück zur Startseite">
@@ -303,7 +275,6 @@
     </div>
   </nav>
 
-  <!-- HERO -->
   <header class="hero">
     <div class="hero__inner">
       <span class="label">Rechtliches</span>
@@ -311,11 +282,9 @@
     </div>
   </header>
 
-  <!-- CONTENT -->
   <main class="content">
     <div class="content__inner">
 
-      <!-- § 5 TMG -->
       <section class="imp-section" aria-labelledby="anbieter">
         <h2 id="anbieter">angaben gemäß § 5 tmg</h2>
         <address>
@@ -326,7 +295,6 @@
         </address>
       </section>
 
-      <!-- KONTAKT -->
       <section class="imp-section" aria-labelledby="kontakt">
         <h2 id="kontakt">kontakt</h2>
         <ul class="contact-list">
@@ -341,14 +309,12 @@
         </ul>
       </section>
 
-      <!-- STEUERNUMMER -->
       <section class="imp-section" aria-labelledby="steuer">
         <h2 id="steuer">steuernummer</h2>
         <p>Steuernummer gemäß § 21 Umsatzsteuergesetz (UStG):</p>
         <span class="placeholder">[Steuernummer des zuständigen Finanzamts eintragen]</span>
       </section>
 
-      <!-- INHALTLICH VERANTWORTLICH -->
       <section class="imp-section" aria-labelledby="verantwortlich">
         <h2 id="verantwortlich">verantwortlich für den inhalt nach § 18 abs. 2 mstv</h2>
         <address>
@@ -358,7 +324,6 @@
         </address>
       </section>
 
-      <!-- EU-STREITSCHLICHTUNG -->
       <section class="imp-section" aria-labelledby="odr">
         <h2 id="odr">eu-streitschlichtung</h2>
         <p>
@@ -370,15 +335,11 @@
         <p>Meine E-Mail-Adresse findest du oben im Impressum.</p>
       </section>
 
-      <!-- VERBRAUCHERSTREITBEILEGUNG -->
       <section class="imp-section" aria-labelledby="streit">
         <h2 id="streit">verbraucherstreitbeilegung</h2>
-        <p>
-          Ich bin nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
-        </p>
+        <p>Ich bin nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
       </section>
 
-      <!-- HAFTUNG FÜR INHALTE -->
       <section class="imp-section" aria-labelledby="haftung-inhalte">
         <h2 id="haftung-inhalte">haftung für inhalte</h2>
         <p>
@@ -389,7 +350,6 @@
         </p>
       </section>
 
-      <!-- HAFTUNG FÜR LINKS -->
       <section class="imp-section" aria-labelledby="haftung-links">
         <h2 id="haftung-links">haftung für links</h2>
         <p>
@@ -400,7 +360,6 @@
         </p>
       </section>
 
-      <!-- URHEBERRECHT -->
       <section class="imp-section" aria-labelledby="urheberrecht">
         <h2 id="urheberrecht">urheberrecht</h2>
         <p>
@@ -409,15 +368,12 @@
         <p>
           Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht von der Betreiberin erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Solltest du trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitte ich um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werde ich derartige Inhalte umgehend entfernen.
         </p>
-        <p>
-          Quelle: <a href="https://www.e-recht24.de" target="_blank" rel="noopener noreferrer">eRecht24</a>
-        </p>
+        <p>Quelle: <a href="https://www.e-recht24.de" target="_blank" rel="noopener noreferrer">eRecht24</a></p>
       </section>
 
     </div>
   </main>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer__inner">
       <a href="/" class="footer__logo" aria-label="raus aus dem gift">
@@ -428,16 +384,13 @@
         </svg>
         <span class="footer__logo-text">raus aus dem gift</span>
       </a>
-
       <p class="footer__help">
         Diese Inhalte ersetzen keine rechtliche, psychologische oder therapeutische Beratung. Bei Gewalt oder akuter Gefahr: Polizei 110 · Hilfetelefon Gewalt gegen Frauen 116 016 · Hilfetelefon Gewalt an Männern 0800 1239900 · Nummer gegen Kummer, Elterntelefon 0800 111 0 550.
       </p>
-
       <nav class="footer__links" aria-label="Rechtliche Links">
         <a href="/impressum">Impressum</a>
         <a href="/datenschutz">Datenschutz</a>
       </nav>
-
       <p class="footer__tagline">es war nie zu viel von dir. es war zu viel gift.</p>
     </div>
   </footer>
