@@ -1,0 +1,7 @@
+Options -MultiViews
+RewriteEngine On
+
+# Saubere URLs: /impressum → /impressum.html, /datenschutz → /datenschutz.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^.]+)$ $1.html [L]
