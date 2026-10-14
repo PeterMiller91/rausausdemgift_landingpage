@@ -940,6 +940,11 @@
 
         <div class="form-card fade">
           <form id="brevo-form" novalidate>
+            <!-- Honeypot gegen Bots: für Menschen unsichtbar -->
+            <div style="position:absolute; left:-9999px;" aria-hidden="true">
+              <label for="website">Bitte leer lassen</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+            </div>
             <div class="form__group">
               <label class="form__label" for="vorname">Dein Vorname</label>
               <input
@@ -1064,19 +1069,11 @@
   ============================================================ -->
   <script>
     /* ----------------------------------------------------------
-       BREVO CONFIG
-       Ersetze vor dem Go-Live:
-       – BREVO_API_KEY: deinen API-Key aus Brevo → Einstellungen → API Keys
-       – BREVO_LIST_ID: die Listen-ID deiner Morgenlicht-Liste in Brevo
-         (Contacts → Lists → auf die Liste klicken → ID in der URL ablesen)
-
-       SICHERHEITSHINWEIS:
-       Der API-Key ist im Client-Code sichtbar. Für ein öffentliches Repo
-       empfiehlt sich ein serverseitiger Proxy (z. B. Netlify Function).
-       Alternativ: Brevo-Formulare über das Brevo-Dashboard einbetten.
+       NEWSLETTER-ANMELDUNG
+       Das Formular spricht nur mit /api/newsletter (Netlify Function
+       netlify/functions/newsletter-anmelden.mjs). Der Brevo-API-Key
+       liegt ausschließlich als Umgebungsvariable auf dem Server.
     ---------------------------------------------------------- */
-    const BREVO_API_KEY = 'YOUR_BREVO_API_KEY';
-    const BREVO_LIST_ID = 0; // z. B. 3
 
     /* ----------------------------------------------------------
        FORM HANDLER
@@ -1133,42 +1130,28 @@
       submitBtn.textContent = 'Einen Moment …';
 
       try {
-        const res = await fetch('https://api.brevo.com/v3/contacts', {
+        const res = await fetch('/api/newsletter', {
           method: 'POST',
-          headers: {
-            'api-key':      BREVO_API_KEY,
-            'Content-Type': 'application/json',
-            'Accept':       'application/json'
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            email:         email,
-            attributes:    { VORNAME: vorname },
-            listIds:       [BREVO_LIST_ID],
-            updateEnabled: true
+            vorname: vorname,
+            email:   email,
+            consent: consent,
+            website: form.website.value
           })
         });
 
-        if (res.ok || res.status === 204) {
-          form.style.display = 'none';
-          statusEl.className   = 'form__status form__status--success';
-          statusEl.innerHTML   = '<strong>Fast geschafft.</strong> Schau in dein Postfach – ich habe dir eine Bestätigungsmail geschickt. Erst wenn du dort auf den Link klickst, bist du dabei. Bis Sonntag!';
-        } else {
-          const data = await res.json().catch(() => ({}));
-          if (res.status === 400 && data.code === 'duplicate_parameter') {
-            // Kontakt bereits vorhanden – trotzdem freundlich abschließen
-            form.style.display = 'none';
-            statusEl.className = 'form__status form__status--success';
-            statusEl.innerHTML = '<strong>Du bist schon dabei.</strong> Schön, dass du es noch einmal versucht hast. Bis Sonntag!';
-          } else {
-            throw new Error(data.message || `HTTP ${res.status}`);
-          }
-        }
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+        form.style.display = 'none';
+        statusEl.className   = 'form__status form__status--success';
+        statusEl.innerHTML   = '<strong>Fast geschafft.</strong> Schau in dein Postfach – ich habe dir eine Bestätigungsmail geschickt. Erst wenn du dort auf den Link klickst, bist du dabei. Bis Sonntag!';
       } catch (err) {
         statusEl.className   = 'form__status form__status--error';
         statusEl.textContent = 'Das hat leider nicht geklappt. Bitte versuche es in einem Moment noch einmal.';
         submitBtn.disabled    = false;
         submitBtn.textContent = 'Ja, schick mir Morgenlicht';
-        console.error('Brevo error:', err);
+        console.error('Anmeldung fehlgeschlagen:', err);
       }
     });
 
