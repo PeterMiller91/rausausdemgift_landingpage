@@ -1,0 +1,1005 @@
+{
+  "name": "Morgenlicht – Freigabe per Telegram",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 14 * * 6"
+            }
+          ]
+        }
+      },
+      "id": "dcd753aa-2e2a-429e-9d08-646c9cff12c1",
+      "name": "Samstag 14 Uhr",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://api.brevo.com/v3/emailCampaigns?status=draft&limit=50&sort=desc&excludeHtmlContent=true",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "id": "8806315f-193a-4b6a-9143-e0a2c7220c92",
+      "name": "Brevo: Entwürfe laden",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        220,
+        0
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Brevo API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Neuester Brevo-Entwurf mit dem Tag \"morgenlicht\" (legt die Cowork-Aufgabe an)\nconst campaigns = $json.campaigns || [];\nconst draft = campaigns.find(c => String(c.tag || '').toLowerCase() === 'morgenlicht');\nif (!draft) {\n  return [{ json: { found: false, chatId: 'DEINE_TELEGRAM_CHAT_ID',\n    message: '⚠️ Ich habe in Brevo keinen Morgenlicht-Entwurf (Tag „morgenlicht“) gefunden. Ist die Cowork-Aufgabe gelaufen?' } }];\n}\nreturn [{ json: { found: true, campaignId: draft.id } }];\n"
+      },
+      "id": "aab1fd72-51e7-46a9-8988-e3fedb70d608",
+      "name": "Morgenlicht-Entwurf finden",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c49a5c75-773a-4705-ab8f-0517a5e7360f",
+              "leftValue": "={{ $json.found }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "7ea1aed1-6934-4fa7-b1f2-ff11f131a26c",
+      "name": "Entwurf gefunden?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        660,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message",
+          "callback_query"
+        ],
+        "additionalFields": {}
+      },
+      "id": "b181c3aa-82cc-44ce-a635-8aad17b92d7c",
+      "name": "Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        500
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "",
+          "name": "Telegram Morgenlicht-Bot"
+        }
+      },
+      "webhookId": "e8bc0a67-fbe6-43c9-96d1-e28c26a53550"
+    },
+    {
+      "parameters": {
+        "jsCode": "const CHAT_ID = 'DEINE_TELEGRAM_CHAT_ID';\nconst u = $json;\n\n// Button gedrückt\nif (u.callback_query) {\n  const cq = u.callback_query;\n  if (String(cq.message?.chat?.id) !== CHAT_ID) return [];   // fremde Chats ignorieren\n  const [action, id] = String(cq.data || '').split(':');\n  return [{ json: { action, campaignId: Number(id), callbackId: cq.id } }];\n}\n\n// Textnachricht\nconst m = u.message;\nif (!m || !m.text) return [];\nconst text = m.text.trim();\n\n// Einrichtung: /id verrät dir deine Chat-ID\nif (text === '/id' || text === '/start') {\n  return [{ json: { action: 'notice', chatId: m.chat.id, message: `Deine Chat-ID: ${m.chat.id}` } }];\n}\nif (String(m.chat.id) !== CHAT_ID) return [];\n\n// Welcher Entwurf? Aus der beantworteten Nachricht (#123), sonst der zuletzt gezeigte\nconst ref = m.reply_to_message?.text || '';\nconst hit = ref.match(/#(\\d+)/);\nconst campaignId = hit ? Number(hit[1]) : $getWorkflowStaticData('global').lastCampaignId;\nif (!campaignId) {\n  return [{ json: { action: 'notice', chatId: CHAT_ID,\n    message: 'Ich weiß nicht, welcher Entwurf gemeint ist. Antworte bitte direkt auf die Vorschau-Nachricht.' } }];\n}\nreturn [{ json: { action: 'revise', campaignId, wish: text } }];\n"
+      },
+      "id": "7d94f190-bfa9-490b-8b36-c102b123c7bf",
+      "name": "Antwort auswerten",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "009c0a9b-b5df-4eb7-9a2d-d083686e7f0d",
+                    "leftValue": "={{ $json.action }}",
+                    "rightValue": "approve",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Freigeben"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "28b49e3e-113e-40a6-bece-e5d1e183cf46",
+                    "leftValue": "={{ $json.action }}",
+                    "rightValue": "edit",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Ändern-Button"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "19e84f0b-ca72-4222-b190-018ce51a0b31",
+                    "leftValue": "={{ $json.action }}",
+                    "rightValue": "revise",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Änderungswunsch"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "db1b8d3f-d4fe-4b1c-8353-177dac8021b3",
+                    "leftValue": "={{ $json.action }}",
+                    "rightValue": "notice",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Hinweis"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "8802adb5-4bdc-47a4-a428-b32162d5d02f",
+      "name": "Aktion?",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        440,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "callback",
+        "operation": "answerQuery",
+        "queryId": "={{ $json.callbackId }}",
+        "additionalFields": {
+          "text": "Wird geplant …"
+        }
+      },
+      "id": "760c5f74-bc48-4e24-88b5-8ac123420d0f",
+      "name": "Klick bestätigen (Freigabe)",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        700,
+        260
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "",
+          "name": "Telegram Morgenlicht-Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Nächster Sonntag 08:00 (Europe/Berlin). Ist es Sonntag nach 8 Uhr, geht er in 10 Minuten raus.\nconst item = $('Antwort auswerten').first().json;\nconst now = DateTime.now().setZone('Europe/Berlin');\nlet when = now.set({ hour: 8, minute: 0, second: 0, millisecond: 0 }).plus({ days: (7 - now.weekday) % 7 });\nif (when <= now) when = now.weekday === 7 ? now.plus({ minutes: 10 }) : when.plus({ weeks: 1 });\nreturn [{ json: {\n  campaignId: item.campaignId,\n  scheduledAt: when.toISO(),\n  label: when.setLocale('de').toFormat(\"cccc, dd.MM. 'um' HH:mm 'Uhr'\"),\n} }];\n"
+      },
+      "id": "97f60bc2-121d-4c24-9e2d-68aeb0063794",
+      "name": "Versandzeit berechnen",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        920,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "={{ 'https://api.brevo.com/v3/emailCampaigns/' + $json.campaignId }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ scheduledAt: $json.scheduledAt, recipients: { listIds: [12] } }) }}",
+        "options": {}
+      },
+      "id": "842de5a8-7e4f-4d81-a08f-a16416e25eaa",
+      "name": "Brevo: Versand planen",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1140,
+        260
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Brevo API"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "DEINE_TELEGRAM_CHAT_ID",
+        "text": "={{ $json.error ? '⚠️ Planen hat nicht geklappt: ' + ($json.error.message || JSON.stringify($json.error)) : '✅ Morgenlicht #' + $('Versandzeit berechnen').first().json.campaignId + ' ist freigegeben und geht am ' + $('Versandzeit berechnen').first().json.label + ' an die Liste „Newsletter RADG“.\\nStoppen kannst du ihn bis dahin in Brevo unter Kampagnen.' }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "2e527feb-f39e-48b8-b8fe-01e68c1cf033",
+      "name": "Telegram: Versand bestätigt",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1360,
+        260
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "",
+          "name": "Telegram Morgenlicht-Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "callback",
+        "operation": "answerQuery",
+        "queryId": "={{ $json.callbackId }}",
+        "additionalFields": {
+          "text": "Schreib mir, was sich ändern soll"
+        }
+      },
+      "id": "116ab6d0-800e-40f0-8b3f-b27129046934",
+      "name": "Klick bestätigen (Ändern)",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        700,
+        420
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "",
+          "name": "Telegram Morgenlicht-Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "DEINE_TELEGRAM_CHAT_ID",
+        "text": "=✏️ Was soll ich an Morgenlicht #{{ $('Antwort auswerten').first().json.campaignId }} ändern?\nAntworte direkt auf diese Nachricht.",
+        "replyMarkup": "forceReply",
+        "forceReply": {
+          "force_reply": true
+        },
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "07b62c97-f45a-4a89-848b-c7277d7b10ae",
+      "name": "Telegram: Änderung erfragen",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        920,
+        420
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "",
+          "name": "Telegram Morgenlicht-Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "DEINE_TELEGRAM_CHAT_ID",
+        "text": "=⏳ Ich überarbeite Morgenlicht #{{ $json.campaignId }} …",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "fa1a674b-dd13-458f-8af1-58f21e25b358",
+      "name": "Telegram: Bin dran",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        700,
+        600
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "",
+          "name": "Telegram Morgenlicht-Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ 'https://api.brevo.com/v3/emailCampaigns/' + $('Antwort auswerten').first().json.campaignId }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "id": "6329c7a3-06ca-4e60-8c0e-9f11a3d6bba4",
+      "name": "Brevo: Aktuellen Stand laden",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        920,
+        600
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Brevo API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const c = $json;\nconst wish = $('Antwort auswerten').first().json.wish;\nconst system = \"Du überarbeitest den Newsletter „Morgenlicht“ von raus aus dem gift (Absenderin: Verena Maria, „dein Brief für den Sonntagmorgen“). Setze den Änderungswunsch genau um und lass alles andere unverändert: Ton und Stimme, Aufbau, HTML-Layout und Styles, Links, Bilder, den Abschluss „Pass gut auf dich auf. Deine Verena Maria“, den Hilfe-Hinweis und alle Brevo-Platzhalter wie {{ unsubscribe }} oder {{ contact.FIRSTNAME }}. Betreff und Vorschautext änderst du nur, wenn der Wunsch das verlangt.\\n\\nAntworte ausschließlich in diesem Format:\\n<subject>Betreff</subject>\\n<preview>Vorschautext</preview>\\n<html>das vollständige HTML der E-Mail</html>\\n<summary>1–2 kurze Sätze, was du geändert hast</summary>\";\nconst user = `Änderungswunsch:\\n${wish}\\n\\n<subject>${c.subject || ''}</subject>\\n<preview>${c.previewText || ''}</preview>\\n<html>\\n${c.htmlContent || ''}\\n</html>`;\nreturn [{ json: {\n  campaignId: c.id,\n  subject: c.subject,\n  previewText: c.previewText,\n  body: {\n    model: 'claude-opus-5-5',\n    max_tokens: 16000,\n    output_config: { effort: 'medium' },\n    fallbacks: 'default',\n    system,\n    messages: [{ role: 'user', content: user }],\n  },\n} }];\n"
+      },
+      "id": "b870dfb7-4e89-47d4-bf2c-975be2af9753",
+      "name": "Anfrage an Claude bauen",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1140,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "anthropic-beta",
+              "value": "server-side-fallback-2026-07-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.body) }}",
+        "options": {
+          "timeout": 600000
+        }
+      },
+      "id": "fbcc3e95-03b8-45e9-ab86-750030bbff57",
+      "name": "Claude: überarbeiten",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1360,
+        600
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Anthropic API"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "const res = $json;\nconst prev = $('Anfrage an Claude bauen').first().json;\nconst fail = message => [{ json: { ok: false, chatId: 'DEINE_TELEGRAM_CHAT_ID', message: '⚠️ ' + message } }];\n\nif (res.error) return fail('Claude war nicht erreichbar: ' + (res.error.message || JSON.stringify(res.error)));\nif (res.stop_reason === 'refusal') return fail('Claude hat die Überarbeitung abgelehnt. Formuliere den Wunsch bitte anders.');\nif (res.stop_reason === 'max_tokens') return fail('Die überarbeitete Fassung war zu lang und wurde abgeschnitten. Der Entwurf ist unverändert.');\n\nconst text = (res.content || []).filter(b => b.type === 'text').map(b => b.text).join('');\nconst pick = tag => {\n  const m = text.match(new RegExp(`<${tag}>([\\\\s\\\\S]*?)</${tag}>`));\n  return m ? m[1].trim() : null;\n};\nconst html = pick('html');\nif (!html || html.length < 200) return fail('Claude hat kein vollständiges HTML geliefert. Der Entwurf ist unverändert.');\n\nreturn [{ json: {\n  ok: true,\n  campaignId: prev.campaignId,\n  subject: pick('subject') || prev.subject,\n  previewText: pick('preview') ?? prev.previewText,\n  htmlContent: html,\n  summary: pick('summary') || '',\n} }];\n"
+      },
+      "id": "00c01f0d-8a8b-4908-a36c-5d57768124c9",
+      "name": "Antwort von Claude auswerten",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1580,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "19e4479b-89e4-4374-8c03-4e642fd2b1f3",
+              "leftValue": "={{ $json.ok }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "78f9058f-0b2e-4057-bb84-0c4208738b83",
+      "name": "Überarbeitung ok?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1800,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "={{ 'https://api.brevo.com/v3/emailCampaigns/' + $json.campaignId }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ subject: $json.subject, previewText: $json.previewText, htmlContent: $json.htmlContent }) }}",
+        "options": {}
+      },
+      "id": "89c0604f-be1f-49e6-891e-7254780125d8",
+      "name": "Brevo: Entwurf aktualisieren",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2020,
+        580
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Brevo API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{ json: { campaignId: $('Antwort von Claude auswerten').first().json.campaignId } }];\n"
+      },
+      "id": "7c5c4c6b-4fe5-42cb-bc79-21395bef5c24",
+      "name": "ID weiterreichen",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2240,
+        580
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{ $json.chatId }}",
+        "text": "={{ $json.message }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "4935b815-e1a4-454c-89c8-0062e298cef9",
+      "name": "Telegram: Hinweis",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2020,
+        800
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "",
+          "name": "Telegram Morgenlicht-Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ 'https://api.brevo.com/v3/emailCampaigns/' + $json.campaignId }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "id": "e7221fe6-23cd-4bf1-bae9-965558ac1d14",
+      "name": "Brevo: Kampagne laden",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2460,
+        0
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Brevo API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const c = $json;\n$getWorkflowStaticData('global').lastCampaignId = c.id;\n\nlet summary = '';\ntry { summary = $('Antwort von Claude auswerten').first().json.summary || ''; } catch (e) {}\n\nconst esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\nconst plain = String(c.htmlContent || '')\n  .replace(/<(style|script|head)[\\s\\S]*?<\\/\\1>/gi, '')\n  .replace(/<br\\s*\\/?>/gi, '\\n')\n  .replace(/<\\/(p|h[1-6]|div|tr|li)>/gi, '\\n')\n  .replace(/<[^>]+>/g, '')\n  .replace(/&nbsp;/g, ' ').replace(/&quot;/g, '\"').replace(/&#39;/g, \"'\")\n  .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&')\n  .replace(/[ \\t]+/g, ' ').replace(/\\n\\s*\\n+/g, '\\n\\n').trim();\nconst MAX = 2800;  // Telegram erlaubt 4096 Zeichen pro Nachricht\nconst excerpt = plain.length > MAX ? plain.slice(0, MAX) + ' …' : plain;\n\nlet text = '';\nif (summary) text += `✏️ <b>Überarbeitet:</b> ${esc(summary)}\\n\\n`;\ntext += `📬 <b>Morgenlicht #${c.id}</b>\\n<b>Betreff:</b> ${esc(c.subject)}\\n<b>Vorschautext:</b> ${esc(c.previewText)}\\n\\n`;\ntext += `${esc(excerpt)}\\n\\n`;\ntext += 'Die Testmail ist in deinem Postfach. Freigeben – oder antworte auf diese Nachricht mit deinen Änderungswünschen.';\nreturn [{ json: { campaignId: c.id, text } }];\n"
+      },
+      "id": "97301fbb-e446-4008-8a78-97a956570a0c",
+      "name": "Vorschau bauen",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2680,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ 'https://api.brevo.com/v3/emailCampaigns/' + $json.campaignId + '/sendTest' }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ emailTo: [\"DEINE_TEST_EMAIL\"] }) }}",
+        "options": {}
+      },
+      "id": "3d8f040c-e5c6-4407-886b-142f342e704a",
+      "name": "Brevo: Testmail senden",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2900,
+        0
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "Brevo API"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "DEINE_TELEGRAM_CHAT_ID",
+        "text": "={{ $('Vorschau bauen').first().json.text }}",
+        "replyMarkup": "inlineKeyboard",
+        "inlineKeyboard": {
+          "rows": [
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "✅ Freigeben (So 8 Uhr)",
+                    "additionalFields": {
+                      "callback_data": "={{ 'approve:' + $('Vorschau bauen').first().json.campaignId }}"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "✏️ Ändern",
+                    "additionalFields": {
+                      "callback_data": "={{ 'edit:' + $('Vorschau bauen').first().json.campaignId }}"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "4c6d868c-c3b7-4f3e-9990-ca24bd8d0dff",
+      "name": "Telegram: Vorschau mit Buttons",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        3120,
+        0
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "",
+          "name": "Telegram Morgenlicht-Bot"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Samstag 14 Uhr": {
+      "main": [
+        [
+          {
+            "node": "Brevo: Entwürfe laden",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Brevo: Entwürfe laden": {
+      "main": [
+        [
+          {
+            "node": "Morgenlicht-Entwurf finden",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Morgenlicht-Entwurf finden": {
+      "main": [
+        [
+          {
+            "node": "Entwurf gefunden?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Entwurf gefunden?": {
+      "main": [
+        [
+          {
+            "node": "Brevo: Kampagne laden",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Telegram: Hinweis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Antwort auswerten",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Antwort auswerten": {
+      "main": [
+        [
+          {
+            "node": "Aktion?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aktion?": {
+      "main": [
+        [
+          {
+            "node": "Klick bestätigen (Freigabe)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Klick bestätigen (Ändern)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Telegram: Bin dran",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Telegram: Hinweis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Klick bestätigen (Freigabe)": {
+      "main": [
+        [
+          {
+            "node": "Versandzeit berechnen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Versandzeit berechnen": {
+      "main": [
+        [
+          {
+            "node": "Brevo: Versand planen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Brevo: Versand planen": {
+      "main": [
+        [
+          {
+            "node": "Telegram: Versand bestätigt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Klick bestätigen (Ändern)": {
+      "main": [
+        [
+          {
+            "node": "Telegram: Änderung erfragen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram: Bin dran": {
+      "main": [
+        [
+          {
+            "node": "Brevo: Aktuellen Stand laden",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Brevo: Aktuellen Stand laden": {
+      "main": [
+        [
+          {
+            "node": "Anfrage an Claude bauen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anfrage an Claude bauen": {
+      "main": [
+        [
+          {
+            "node": "Claude: überarbeiten",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude: überarbeiten": {
+      "main": [
+        [
+          {
+            "node": "Antwort von Claude auswerten",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Antwort von Claude auswerten": {
+      "main": [
+        [
+          {
+            "node": "Überarbeitung ok?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Überarbeitung ok?": {
+      "main": [
+        [
+          {
+            "node": "Brevo: Entwurf aktualisieren",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Telegram: Hinweis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Brevo: Entwurf aktualisieren": {
+      "main": [
+        [
+          {
+            "node": "ID weiterreichen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ID weiterreichen": {
+      "main": [
+        [
+          {
+            "node": "Brevo: Kampagne laden",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Brevo: Kampagne laden": {
+      "main": [
+        [
+          {
+            "node": "Vorschau bauen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vorschau bauen": {
+      "main": [
+        [
+          {
+            "node": "Brevo: Testmail senden",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Brevo: Testmail senden": {
+      "main": [
+        [
+          {
+            "node": "Telegram: Vorschau mit Buttons",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Berlin",
+    "saveManualExecutions": true
+  },
+  "pinData": {},
+  "active": false
+}
