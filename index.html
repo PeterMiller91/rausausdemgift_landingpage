@@ -982,6 +982,12 @@
             </div>
             <span class="form__field-error" id="consent-err" role="alert" style="display:none; margin-top:-12px; margin-bottom:20px;">Bitte stimme der Datenschutzerklärung zu, um fortzufahren.</span>
 
+            <!-- Honeypot gegen Spam-Bots: für Menschen unsichtbar -->
+            <div aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;">
+              <label for="website">Bitte leer lassen</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+
             <button type="submit" class="btn form__submit">Ja, schick mir Morgenlicht</button>
 
             <div class="form__status" id="form-status" aria-live="polite"></div>
@@ -1064,19 +1070,13 @@
   ============================================================ -->
   <script>
     /* ----------------------------------------------------------
-       BREVO CONFIG
-       Ersetze vor dem Go-Live:
-       – BREVO_API_KEY: deinen API-Key aus Brevo → Einstellungen → API Keys
-       – BREVO_LIST_ID: die Listen-ID deiner Morgenlicht-Liste in Brevo
-         (Contacts → Lists → auf die Liste klicken → ID in der URL ablesen)
-
-       SICHERHEITSHINWEIS:
-       Der API-Key ist im Client-Code sichtbar. Für ein öffentliches Repo
-       empfiehlt sich ein serverseitiger Proxy (z. B. Netlify Function).
-       Alternativ: Brevo-Formulare über das Brevo-Dashboard einbetten.
+       BREVO
+       Die Anmeldung läuft über /api/newsletter.php. Dort liegt der
+       API-Key serverseitig (api/config.php) und Brevo verschickt die
+       Double-Opt-In-Mail. Danach landet der Kontakt in der Liste
+       „Morgenlicht“.
     ---------------------------------------------------------- */
-    const BREVO_API_KEY = 'YOUR_BREVO_API_KEY';
-    const BREVO_LIST_ID = 0; // z. B. 3
+    const NEWSLETTER_ENDPOINT = '/api/newsletter.php';
 
     /* ----------------------------------------------------------
        FORM HANDLER
@@ -1133,42 +1133,34 @@
       submitBtn.textContent = 'Einen Moment …';
 
       try {
-        const res = await fetch('https://api.brevo.com/v3/contacts', {
+        const res = await fetch(NEWSLETTER_ENDPOINT, {
           method: 'POST',
           headers: {
-            'api-key':      BREVO_API_KEY,
             'Content-Type': 'application/json',
             'Accept':       'application/json'
           },
           body: JSON.stringify({
-            email:         email,
-            attributes:    { VORNAME: vorname },
-            listIds:       [BREVO_LIST_ID],
-            updateEnabled: true
+            vorname: vorname,
+            email:   email,
+            consent: consent,
+            website: form.website.value
           })
         });
 
-        if (res.ok || res.status === 204) {
-          form.style.display = 'none';
-          statusEl.className   = 'form__status form__status--success';
-          statusEl.innerHTML   = '<strong>Fast geschafft.</strong> Schau in dein Postfach – ich habe dir eine Bestätigungsmail geschickt. Erst wenn du dort auf den Link klickst, bist du dabei. Bis Sonntag!';
-        } else {
-          const data = await res.json().catch(() => ({}));
-          if (res.status === 400 && data.code === 'duplicate_parameter') {
-            // Kontakt bereits vorhanden – trotzdem freundlich abschließen
-            form.style.display = 'none';
-            statusEl.className = 'form__status form__status--success';
-            statusEl.innerHTML = '<strong>Du bist schon dabei.</strong> Schön, dass du es noch einmal versucht hast. Bis Sonntag!';
-          } else {
-            throw new Error(data.message || `HTTP ${res.status}`);
-          }
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data.ok) {
+          throw new Error(data.error || `HTTP ${res.status}`);
         }
+
+        form.style.display = 'none';
+        statusEl.className = 'form__status form__status--success';
+        statusEl.innerHTML = '<strong>Fast geschafft.</strong> Schau in dein Postfach – ich habe dir eine Bestätigungsmail geschickt. Erst wenn du dort auf den Link klickst, bist du dabei. Bis Sonntag!';
       } catch (err) {
         statusEl.className   = 'form__status form__status--error';
         statusEl.textContent = 'Das hat leider nicht geklappt. Bitte versuche es in einem Moment noch einmal.';
         submitBtn.disabled    = false;
         submitBtn.textContent = 'Ja, schick mir Morgenlicht';
-        console.error('Brevo error:', err);
+        console.error('Newsletter error:', err);
       }
     });
 
