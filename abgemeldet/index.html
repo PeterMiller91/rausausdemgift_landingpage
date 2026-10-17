@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abgemeldet · Morgenlicht · raus aus dem gift</title>
+  <meta name="description" content="Du hast dich von Morgenlicht abgemeldet.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --plum:        #4A2C3D;
+      --plum-soft:   #6B4A5D;
+      --mauve:       #8A6275;
+      --cream:       #FBF4F0;
+      --powder:      #F3E6E1;
+      --powder-2:    #EEDFD9;
+      --line:        #E6D0D8;
+      --rose:        #EBC3BA;
+      --berry:       #B8565A;
+      --berry-hover: #A44B50;
+
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans:  'Jost', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      font-weight: 400;
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--plum);
+      background: var(--cream);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--berry); text-decoration: underline; }
+    a:hover { color: var(--berry-hover); }
+
+    .nav {
+      background: var(--cream);
+      border-bottom: 1px solid var(--line);
+      padding: 0 22px;
+    }
+
+    .nav__inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--plum);
+      flex-shrink: 0;
+    }
+
+    .logo__text {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 500;
+      font-style: italic;
+    }
+
+    .nav__back {
+      font-size: 14px;
+      color: var(--plum-soft);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 44px;
+    }
+
+    .nav__back:hover { color: var(--plum); }
+    .nav__back::before { content: "←"; font-size: 16px; }
+
+    .hero {
+      background: var(--plum);
+      padding: 56px 22px 64px;
+    }
+
+    .hero__inner { max-width: 1100px; margin: 0 auto; }
+
+    .label {
+      font-size: 12px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--rose);
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(38px, 7vw, 56px);
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1.02;
+      text-transform: lowercase;
+      color: var(--cream);
+    }
+
+    .content { padding: 72px 22px 80px; }
+    .content__inner { max-width: 720px; margin: 0 auto; }
+
+    .section { margin-bottom: 48px; }
+    .section:last-child { margin-bottom: 0; }
+
+    .section h2 {
+      font-family: var(--font-serif);
+      font-size: 26px;
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1.1;
+      text-transform: lowercase;
+      color: var(--plum);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section p {
+      color: var(--plum-soft);
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 12px;
+      max-width: 62ch;
+      text-wrap: pretty;
+    }
+
+    .section p:last-of-type { margin-bottom: 0; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 34px;
+      border-radius: 999px;
+      background: var(--berry);
+      color: var(--cream);
+      font: 500 17px/1 var(--font-sans);
+      text-decoration: none;
+      margin-top: 28px;
+      transition: background 220ms ease-out;
+    }
+
+    .btn:hover { background: var(--berry-hover); color: var(--cream); }
+    .btn:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
+
+    .footer {
+      background: var(--plum);
+      padding: 64px 22px 48px;
+    }
+
+    .footer__inner { max-width: 1100px; margin: 0 auto; }
+
+    .footer__logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--cream);
+      text-decoration: none;
+      margin-bottom: 36px;
+    }
+
+    .footer__logo-text {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 500;
+      font-style: italic;
+    }
+
+    .footer__help {
+      font-size: 13px;
+      color: var(--line);
+      max-width: 680px;
+      margin-bottom: 36px;
+      line-height: 1.6;
+    }
+
+    .footer__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+      margin-bottom: 48px;
+    }
+
+    .footer__links a {
+      font-size: 14px;
+      color: var(--line);
+      text-decoration: none;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .footer__links a:hover { color: var(--cream); }
+
+    .footer__tagline {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 500;
+      font-style: italic;
+      color: var(--rose);
+      border-top: 1px solid var(--plum-soft);
+      padding-top: 28px;
+    }
+
+    @media (max-width: 480px) {
+      .btn { width: 100%; max-width: 420px; }
+      .logo__text { font-size: 17px; }
+      .content { padding: 56px 22px 64px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" aria-label="Hauptnavigation">
+    <div class="nav__inner">
+      <a href="/" class="logo" aria-label="raus aus dem gift – zurück zur Startseite">
+        <svg viewBox="0 0 100 60" width="38" height="23" fill="none" stroke-linecap="round" aria-hidden="true">
+          <path d="M14 50H86" stroke="currentColor" stroke-width="4"/>
+          <path d="M30 50A20 20 0 0 1 62 34" stroke="currentColor" stroke-width="4"/>
+          <circle cx="72" cy="20" r="6.5" fill="#EBC3BA"/>
+        </svg>
+        <span class="logo__text">raus aus dem gift</span>
+      </a>
+      <a href="/" class="nav__back">Zurück</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero__inner">
+      <span class="label">Newsletter · Morgenlicht</span>
+      <h1>schade, dass du gehst</h1>
+    </div>
+  </header>
+
+  <main class="content">
+    <div class="content__inner">
+
+      <section class="section" aria-labelledby="abgemeldet">
+        <h2 id="abgemeldet">du wurdest abgemeldet</h2>
+        <p>Deine E-Mail-Adresse wurde aus der Morgenlicht-Liste entfernt. Du bekommst keine weiteren Briefe von mir.</p>
+        <p>Ich hoffe, du hast etwas Nützliches mitgenommen. Pass gut auf dich auf.<br>Deine Verena Maria</p>
+      </section>
+
+      <section class="section" aria-labelledby="wiederanmelden">
+        <h2 id="wiederanmelden">doch dabei bleiben?</h2>
+        <p>Wenn du dich versehentlich abgemeldet hast oder es dir anders überlegst, kannst du dich jederzeit neu anmelden – kostenlos, ohne Verpflichtung.</p>
+        <a href="/#newsletter-form" class="btn">Neu anmelden</a>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <a href="/" class="footer__logo" aria-label="raus aus dem gift">
+        <svg viewBox="0 0 100 60" width="38" height="23" fill="none" stroke-linecap="round" aria-hidden="true">
+          <path d="M14 50H86" stroke="currentColor" stroke-width="4"/>
+          <path d="M30 50A20 20 0 0 1 62 34" stroke="currentColor" stroke-width="4"/>
+          <circle cx="72" cy="20" r="6.5" fill="#EBC3BA"/>
+        </svg>
+        <span class="footer__logo-text">raus aus dem gift</span>
+      </a>
+      <p class="footer__help">
+        Diese Inhalte ersetzen keine rechtliche, psychologische oder therapeutische Beratung. Bei Gewalt oder akuter Gefahr: Polizei 110 · Hilfetelefon Gewalt gegen Frauen 116 016 · Hilfetelefon Gewalt an Männern 0800 1239900 · Nummer gegen Kummer, Elterntelefon 0800 111 0 550.
+      </p>
+      <nav class="footer__links" aria-label="Rechtliche Links">
+        <a href="/impressum">Impressum</a>
+        <a href="/datenschutz">Datenschutz</a>
+      </nav>
+      <p class="footer__tagline">es war nie zu viel von dir. es war zu viel gift.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
