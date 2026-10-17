@@ -6,6 +6,8 @@
   <title>Morgenlicht – dein Brief für den Sonntagmorgen · raus aus dem gift</title>
   <meta name="description" content="Morgenlicht ist der kostenlose Newsletter für Menschen, die gerade rausfinden, was ihnen passiert ist – und wie sie weiterleben wollen. Von Verena Maria.">
   <meta name="robots" content="index, follow">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/favicon.svg">
   <meta property="og:title" content="Morgenlicht – dein Brief für den Sonntagmorgen">
   <meta property="og:description" content="Jeden Sonntag ein Brief von Verena Maria. Für alle, die raus wollen aus toxischen Mustern.">
   <meta property="og:type" content="website">
@@ -238,6 +240,124 @@
       min-height: 44px;
       padding: 0 20px;
       width: auto;
+    }
+
+    /* Nav: links (desktop) */
+    .nav__links {
+      display: none;
+      list-style: none;
+      align-items: center;
+      gap: 2px;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .nav__link {
+      display: block;
+      font-size: 15px;
+      color: var(--plum-soft);
+      text-decoration: none;
+      padding: 7px 12px;
+      border-radius: 10px;
+      transition: color 180ms, background 180ms;
+      white-space: nowrap;
+    }
+
+    .nav__link:hover { color: var(--plum); background: var(--powder); }
+    .nav__link:focus-visible { outline: 3px solid var(--rose); outline-offset: 2px; }
+
+    /* Nav end */
+    .nav__end {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    /* Hamburger button */
+    .nav__hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 11px 8px;
+      color: var(--plum);
+      border-radius: 10px;
+      transition: background 180ms;
+      min-height: 44px;
+      min-width: 44px;
+    }
+
+    .nav__hamburger:hover { background: var(--powder); }
+    .nav__hamburger:focus-visible { outline: 3px solid var(--rose); outline-offset: 2px; }
+
+    .ham-bar {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: currentColor;
+      border-radius: 2px;
+      transform-origin: center;
+      transition: transform 240ms ease, opacity 180ms;
+    }
+
+    .nav--open .ham-bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav--open .ham-bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav--open .ham-bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    /* Mobile dropdown menu */
+    .nav__mobile-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--cream);
+      border-bottom: 1px solid var(--line);
+      padding: 16px 22px 24px;
+      box-shadow: 0 8px 24px rgba(74,44,61,.08);
+      z-index: 99;
+    }
+
+    .nav__mobile-menu.open { display: flex; flex-direction: column; }
+
+    .nav__mobile-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+    }
+
+    .nav__mobile-link {
+      display: block;
+      padding: 14px 4px;
+      color: var(--plum);
+      text-decoration: none;
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 500;
+      font-style: italic;
+      border-bottom: 1px solid var(--powder-2);
+      transition: color 150ms;
+    }
+
+    .nav__mobile-link:hover { color: var(--berry); }
+    .nav__mobile-link:focus-visible { outline: 3px solid var(--rose); outline-offset: 2px; }
+
+    .nav__mobile-btn { width: 100%; max-width: none; margin-top: 4px; }
+
+    /* ≥ 860 px: show links, hide hamburger */
+    @media (min-width: 860px) {
+      .nav__links { display: flex; }
+      .nav__hamburger { display: none; }
+    }
+
+    /* < 860 px: hide desktop CTA in bar */
+    @media (max-width: 859px) {
+      .nav__btn { display: none; }
     }
 
     /* ============================================================
@@ -786,7 +906,29 @@
         </svg>
         <span class="logo__text">raus aus dem gift</span>
       </a>
-      <a href="#newsletter-form" class="btn btn--secondary nav__btn">Morgenlicht lesen</a>
+      <ul class="nav__links" role="list" aria-label="Seitenabschnitte">
+        <li><a href="#fuer-wen" class="nav__link">für wen?</a></li>
+        <li><a href="#was-erwartet-mich" class="nav__link">der brief</a></li>
+        <li><a href="#ueber-verena" class="nav__link">über Verena</a></li>
+        <li><a href="#faq" class="nav__link">fragen</a></li>
+      </ul>
+      <div class="nav__end">
+        <a href="#newsletter-form" class="btn btn--secondary nav__btn">Morgenlicht lesen</a>
+        <button class="nav__hamburger" aria-expanded="false" aria-controls="nav-mobile-menu" aria-label="Menü öffnen">
+          <span class="ham-bar"></span>
+          <span class="ham-bar"></span>
+          <span class="ham-bar"></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav__mobile-menu" id="nav-mobile-menu" aria-hidden="true">
+      <ul class="nav__mobile-list" role="list">
+        <li><a href="#fuer-wen" class="nav__mobile-link">für wen?</a></li>
+        <li><a href="#was-erwartet-mich" class="nav__mobile-link">der brief</a></li>
+        <li><a href="#ueber-verena" class="nav__mobile-link">über Verena</a></li>
+        <li><a href="#faq" class="nav__mobile-link">fragen</a></li>
+      </ul>
+      <a href="#newsletter-form" class="btn nav__mobile-btn">Jetzt kostenlos anmelden</a>
     </div>
   </nav>
 
@@ -808,7 +950,7 @@
   <!-- ============================================================
        PROBLEM
   ============================================================ -->
-  <section class="section problem">
+  <section class="section problem" id="fuer-wen">
     <div class="container">
       <div class="text-col">
         <span class="label fade">Erkennst du dich?</span>
@@ -844,7 +986,7 @@
   <!-- ============================================================
        WHAT YOU GET
   ============================================================ -->
-  <section class="section what-you-get">
+  <section class="section what-you-get" id="was-erwartet-mich">
     <div class="container">
       <span class="label fade">Was dich erwartet</span>
       <h2 class="fade">was dich sonntags morgens erwartet</h2>
@@ -872,7 +1014,7 @@
   <!-- ============================================================
        ABOUT
   ============================================================ -->
-  <section class="section about">
+  <section class="section about" id="ueber-verena">
     <div class="container">
       <div class="about__grid">
         <div
@@ -1005,7 +1147,7 @@
   <!-- ============================================================
        FAQ
   ============================================================ -->
-  <section class="section faq">
+  <section class="section faq" id="faq">
     <div class="container">
       <span class="label fade">Fragen & Antworten</span>
       <h2 class="fade">häufige fragen</h2>
@@ -1163,6 +1305,44 @@
         console.error('Newsletter error:', err);
       }
     });
+
+    /* ----------------------------------------------------------
+       HAMBURGER / MOBILE MENU
+    ---------------------------------------------------------- */
+    (function () {
+      const navEl      = document.querySelector('.nav');
+      const hamburger  = document.querySelector('.nav__hamburger');
+      const mobileMenu = document.getElementById('nav-mobile-menu');
+
+      function openMenu() {
+        navEl.classList.add('nav--open');
+        hamburger.setAttribute('aria-expanded', 'true');
+        mobileMenu.setAttribute('aria-hidden', 'false');
+        mobileMenu.classList.add('open');
+      }
+
+      function closeMenu() {
+        navEl.classList.remove('nav--open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        mobileMenu.classList.remove('open');
+      }
+
+      hamburger.addEventListener('click', () => {
+        navEl.classList.contains('nav--open') ? closeMenu() : openMenu();
+      });
+
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navEl.classList.contains('nav--open')) {
+          closeMenu();
+          hamburger.focus();
+        }
+      });
+    })();
 
     /* ----------------------------------------------------------
        FADE-IN INTERSECTION OBSERVER
