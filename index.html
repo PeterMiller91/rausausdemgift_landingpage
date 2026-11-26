@@ -2,6 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
+  <meta name="color-scheme" content="light">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Morgenlicht – der kostenlose Sonntagsbrief nach toxischen Beziehungen · raus aus dem gift</title>
   <meta name="description" content="Morgenlicht ist der kostenlose Sonntagsbrief von Verena Maria für alle, die eine toxische Beziehung erlebt haben: jede Woche eine klare Erklärung, ein Werkzeug für den Alltag und das Gefühl, nicht allein zu sein.">
@@ -25,1346 +26,463 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Jost:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
-    /* ============================================================
-       DESIGN TOKENS
-    ============================================================ */
-    :root {
-      --plum:        #4A2C3D;
-      --plum-soft:   #6B4A5D;
-      --mauve:       #8A6275;
-      --cream:       #FBF4F0;
-      --powder:      #F3E6E1;
-      --powder-2:    #EEDFD9;
-      --line:        #E6D0D8;
-      --line-2:      #D9C3CB;
-      --rose:        #EBC3BA;
-      --berry:       #B8565A;
-      --berry-hover: #A44B50;
-      --error:       #9E3B3F;
-      --error-bg:    #F8E3E3;
-
-      --font-serif: 'Cormorant Garamond', Georgia, serif;
-      --font-sans:  'Jost', system-ui, sans-serif;
-    }
-
-    /* ============================================================
-       RESET & BASE
-    ============================================================ */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html {
-      font-size: 16px;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: var(--font-sans);
-      font-weight: 400;
-      font-size: 17px;
-      line-height: 1.65;
-      color: var(--plum);
-      background: var(--cream);
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    a { color: inherit; }
-
-    /* ============================================================
-       TYPOGRAPHY
-    ============================================================ */
-    h1 {
-      font-family: var(--font-serif);
-      font-size: clamp(38px, 7vw, 64px);
-      font-weight: 500;
-      font-style: italic;
-      line-height: 1.02;
-      text-wrap: balance;
-      text-transform: lowercase;
-    }
-
-    h2 {
-      font-family: var(--font-serif);
-      font-size: clamp(32px, 6vw, 46px);
-      font-weight: 500;
-      font-style: italic;
-      line-height: 1.05;
-      text-transform: lowercase;
-    }
-
-    h3 {
-      font-family: var(--font-serif);
-      font-size: 26px;
-      font-weight: 500;
-      font-style: italic;
-      line-height: 1.1;
-      text-transform: lowercase;
-    }
-
-    p { text-wrap: pretty; }
-
-    strong { font-weight: 500; }
-
-    /* ============================================================
-       LAYOUT UTILS
-    ============================================================ */
-    .section {
-      padding: 72px 22px;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .text-col {
-      max-width: 720px;
-    }
-
-    /* ============================================================
-       LABEL / EYEBROW
-    ============================================================ */
-    .label {
-      font-family: var(--font-sans);
-      font-weight: 400;
-      font-size: 12px;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--plum-soft);
-      display: block;
-      margin-bottom: 16px;
-    }
-
-    .label--light { color: var(--rose); }
-
-    /* ============================================================
-       BUTTON
-    ============================================================ */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 52px;
-      padding: 0 34px;
-      border-radius: 999px;
-      background: var(--berry);
-      color: var(--cream);
-      font-family: var(--font-sans);
-      font-weight: 500;
-      font-size: 17px;
-      line-height: 1;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      transition: background 220ms ease-out;
-      width: 100%;
-    }
-
-    .btn:hover  { background: var(--berry-hover); }
-    .btn:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
-
-    .btn--secondary { background: var(--plum); }
-    .btn--secondary:hover { background: var(--plum-soft); }
-
-    .btn--rose { background: var(--rose); color: var(--plum); }
-    .btn--rose:hover { background: var(--powder-2); }
-
-    @media (min-width: 480px) {
-      .btn { width: auto; max-width: 420px; }
-    }
-
-    /* ============================================================
-       FADE-IN
-    ============================================================ */
-    @media (prefers-reduced-motion: no-preference) {
-      .fade {
-        opacity: 0;
-        transform: translateY(8px);
-        transition: opacity 500ms ease-out, transform 500ms ease-out;
-      }
-      .fade.visible {
-        opacity: 1;
-        transform: none;
-      }
-      .fade:nth-child(2) { transition-delay: 80ms; }
-      .fade:nth-child(3) { transition-delay: 160ms; }
-      .fade:nth-child(4) { transition-delay: 240ms; }
-    }
-
-    /* ============================================================
-       NAV
-    ============================================================ */
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--cream);
-      border-bottom: 1px solid var(--line);
-      padding: 0 22px;
-    }
-
-    .nav__inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: var(--plum);
-      flex-shrink: 0;
-    }
-
-    .logo__text {
-      font-family: var(--font-serif);
-      font-size: 20px;
-      font-weight: 500;
-      font-style: italic;
-    }
-
-    .nav__btn {
-      font-size: 15px;
-      min-height: 44px;
-      padding: 0 20px;
-      width: auto;
-    }
-
-    /* Nav: links (desktop) */
-    .nav__links {
-      display: none;
-      list-style: none;
-      align-items: center;
-      gap: 2px;
-      flex: 1;
-      justify-content: center;
-    }
-
-    .nav__link {
-      display: block;
-      font-size: 15px;
-      color: var(--plum-soft);
-      text-decoration: none;
-      padding: 7px 12px;
-      border-radius: 10px;
-      transition: color 180ms, background 180ms;
-      white-space: nowrap;
-    }
-
-    .nav__link:hover { color: var(--plum); background: var(--powder); }
-    .nav__link:focus-visible { outline: 3px solid var(--rose); outline-offset: 2px; }
-
-    /* Nav end */
-    .nav__end {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-shrink: 0;
-    }
-
-    /* Hamburger button */
-    .nav__hamburger {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 4px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 11px 8px;
-      color: var(--plum);
-      border-radius: 10px;
-      transition: background 180ms;
-      min-height: 44px;
-      min-width: 44px;
-    }
-
-    .nav__hamburger:hover { background: var(--powder); }
-    .nav__hamburger:focus-visible { outline: 3px solid var(--rose); outline-offset: 2px; }
-
-    .ham-bar {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: currentColor;
-      border-radius: 2px;
-      transform-origin: center;
-      transition: transform 240ms ease, opacity 180ms;
-    }
-
-    .nav--open .ham-bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-    .nav--open .ham-bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    .nav--open .ham-bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-
-    /* Mobile dropdown menu */
-    .nav__mobile-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: var(--cream);
-      border-bottom: 1px solid var(--line);
-      padding: 16px 22px 24px;
-      box-shadow: 0 8px 24px rgba(74,44,61,.08);
-      z-index: 99;
-    }
-
-    .nav__mobile-menu.open { display: flex; flex-direction: column; }
-
-    .nav__mobile-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 20px;
-    }
-
-    .nav__mobile-link {
-      display: block;
-      padding: 14px 4px;
-      color: var(--plum);
-      text-decoration: none;
-      font-family: var(--font-serif);
-      font-size: 22px;
-      font-weight: 500;
-      font-style: italic;
-      border-bottom: 1px solid var(--powder-2);
-      transition: color 150ms;
-    }
-
-    .nav__mobile-link:hover { color: var(--berry); }
-    .nav__mobile-link:focus-visible { outline: 3px solid var(--rose); outline-offset: 2px; }
-
-    .nav__mobile-btn { width: 100%; max-width: none; margin-top: 4px; }
-
-    /* ≥ 860 px: show links, hide hamburger */
-    @media (min-width: 860px) {
-      .nav__links { display: flex; }
-      .nav__hamburger { display: none; }
-    }
-
-    /* < 860 px: hide desktop CTA in bar */
-    @media (max-width: 859px) {
-      .nav__btn { display: none; }
-    }
-
-    /* ============================================================
-       HERO
-    ============================================================ */
-    .hero {
-      background: var(--plum);
-      padding: 72px 22px 80px;
-    }
-
-    .hero__inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .hero h1 {
-      color: var(--cream);
-      margin-bottom: 28px;
-      max-width: 680px;
-    }
-
-    .hero__text {
-      color: var(--line);
-      max-width: 580px;
-      margin-bottom: 36px;
-      font-size: 18px;
-    }
-
-    .hero__cta-group {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      align-items: flex-start;
-    }
-
-    .hero__note {
-      font-size: 13px;
-      color: var(--rose);
-      letter-spacing: .02em;
-    }
-
-    /* ============================================================
-       PROBLEM
-    ============================================================ */
-    .problem {
-      background: var(--cream);
-    }
-
-    .problem h2 {
-      margin-bottom: 22px;
-    }
-
-    .problem__intro {
-      color: var(--plum-soft);
-      margin-bottom: 36px;
-      max-width: 62ch;
-    }
-
-    .checklist {
-      list-style: none;
-      margin-bottom: 36px;
-    }
-
-    .checklist__item {
-      display: flex;
-      gap: 14px;
-      padding: 9px 0;
-      border-bottom: 1px solid var(--powder);
-      align-items: flex-start;
-    }
-
-    .checklist__item:first-child { border-top: 1px solid var(--powder); }
-
-    .checklist__box {
-      width: 15px;
-      height: 15px;
-      min-width: 15px;
-      border: 1.5px solid var(--mauve);
-      border-radius: 4px;
-      margin-top: 5px;
-    }
-
-    /* ============================================================
-       WHAT YOU GET
-    ============================================================ */
-    .what-you-get { background: var(--powder); }
-
-    .what-you-get h2 { margin-bottom: 12px; }
-
-    .what-you-get__intro {
-      color: var(--plum-soft);
-      margin-bottom: 48px;
-      max-width: 62ch;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 22px;
-    }
-
-    .card {
-      background: var(--cream);
-      border-radius: 22px;
-      padding: 28px 26px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .card__label {
-      font-size: 12px;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--plum-soft);
-    }
-
-    .card__title {
-      font-family: var(--font-serif);
-      font-size: 24px;
-      font-weight: 500;
-      font-style: italic;
-      line-height: 1.1;
-      text-transform: lowercase;
-      color: var(--plum);
-    }
-
-    .card__text {
-      color: var(--plum-soft);
-      font-size: 16px;
-    }
-
-    /* ============================================================
-       ABOUT
-    ============================================================ */
-    .about { background: var(--plum); }
-
-    .about__grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 48px;
-      align-items: center;
-    }
-
-    @media (min-width: 900px) {
-      .about__grid { grid-template-columns: 1fr 1fr; }
-    }
-
-    .about__portrait {
-      width: 100%;
-      max-width: 360px;
-      aspect-ratio: 3 / 4;
-      background: var(--powder-2);
-      border-radius: 120px 120px 22px 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px dashed var(--mauve);
-      color: var(--mauve);
-      font-size: 14px;
-      margin: 0 auto;
-    }
-
-    .about h2 {
-      color: var(--cream);
-      margin-bottom: 22px;
-    }
-
-    .about__text {
-      color: var(--line);
-      margin-bottom: 16px;
-      max-width: 62ch;
-    }
-
-    .about__signature {
-      font-family: var(--font-serif);
-      font-size: 24px;
-      font-weight: 500;
-      font-style: italic;
-      color: var(--rose);
-      margin-top: 8px;
-    }
-
-    /* ============================================================
-       TESTIMONIALS
-    ============================================================ */
-    .testimonials { background: var(--cream); }
-
-    .testimonials h2 { margin-bottom: 48px; }
-
-    .quotes {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 22px;
-    }
-
-    .quote {
-      background: var(--powder);
-      border-radius: 22px;
-      padding: 28px 26px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .quote__text {
-      font-family: var(--font-serif);
-      font-size: 23px;
-      font-weight: 500;
-      font-style: italic;
-      line-height: 1.25;
-      color: var(--plum);
-    }
-
-    .quote__author {
-      font-size: 14px;
-      color: var(--plum-soft);
-    }
-
-    /* ============================================================
-       CTA STRIP
-    ============================================================ */
-    .cta-strip {
-      background: var(--plum);
-      padding: 64px 22px;
-      text-align: center;
-    }
-
-    .cta-strip h2 {
-      color: var(--cream);
-      margin-bottom: 16px;
-    }
-
-    .cta-strip__text {
-      color: var(--line);
-      margin: 0 auto 32px;
-      max-width: 52ch;
-    }
-
-    .cta-strip .btn {
-      margin: 0 auto;
-    }
-
-    /* ============================================================
-       FORM SECTION
-    ============================================================ */
-    .form-section { background: var(--powder); }
-
-    .form-section h2 { margin-bottom: 12px; }
-
-    .form-section__intro {
-      color: var(--plum-soft);
-      margin-bottom: 36px;
-      max-width: 62ch;
-    }
-
-    .form-card {
-      background: #fff;
-      border-radius: 22px;
-      padding: 36px 28px;
-      max-width: 560px;
-      box-shadow: 0 20px 40px rgba(74,44,61,.12);
-    }
-
-    .form__group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-bottom: 22px;
-    }
-
-    .form__label {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--plum);
-    }
-
-    .form__input {
-      height: 52px;
-      padding: 0 16px;
-      border: 1.5px solid var(--line-2);
-      border-radius: 14px;
-      background: var(--cream);
-      font-family: var(--font-sans);
-      font-size: 16px;
-      color: var(--plum);
-      transition: border-color 200ms, outline 200ms;
-      width: 100%;
-      appearance: none;
-    }
-
-    .form__input::placeholder { color: var(--mauve); }
-
-    .form__input:focus {
-      outline: 3px solid var(--rose);
-      outline-offset: 0;
-      border-color: var(--plum);
-    }
-
-    .form__input.is-error { border-color: var(--error); }
-
-    .form__field-error {
-      font-size: 14px;
-      color: var(--error);
-      display: none;
-    }
-
-    .form__field-error.visible { display: block; }
-
-    .form__consent-row {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      margin-bottom: 28px;
-    }
-
-    .form__checkbox {
-      width: 22px;
-      height: 22px;
-      min-width: 22px;
-      border: 1.5px solid var(--mauve);
-      border-radius: 6px;
-      appearance: none;
-      cursor: pointer;
-      margin-top: 2px;
-      transition: background 150ms, border-color 150ms;
-    }
-
-    .form__checkbox:checked {
-      background: var(--mauve);
-      border-color: var(--mauve);
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 14 11' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 5.5L5 9.5L13 1.5' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 12px;
-    }
-
-    .form__checkbox:focus-visible {
-      outline: 3px solid var(--rose);
-      outline-offset: 2px;
-    }
-
-    .form__consent-label {
-      font-size: 14px;
-      color: var(--plum-soft);
-      line-height: 1.55;
-      cursor: pointer;
-    }
-
-    .form__consent-label a {
-      color: var(--berry);
-      text-decoration: underline;
-    }
-
-    .form__submit { width: 100%; max-width: none; }
-
-    .form__status {
-      display: none;
-      padding: 16px 20px;
-      border-radius: 14px;
-      font-size: 15px;
-      margin-top: 16px;
-      line-height: 1.55;
-    }
-
-    .form__status--success {
-      display: block;
-      background: #edf7ee;
-      color: #2d6a31;
-    }
-
-    .form__status--error {
-      display: block;
-      background: var(--error-bg);
-      color: var(--error);
-    }
-
-    /* ============================================================
-       NOTICE BOX
-    ============================================================ */
-    .notice {
-      background: var(--powder-2);
-      border-radius: 16px;
-      padding: 22px 24px;
-      margin-top: 48px;
-      max-width: 560px;
-    }
-
-    .notice__label {
-      font-size: 12px;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--plum-soft);
-      margin-bottom: 8px;
-    }
-
-    .notice p {
-      font-size: 14px;
-      color: var(--plum-soft);
-      line-height: 1.6;
-    }
-
-    /* ============================================================
-       FAQ
-    ============================================================ */
-    .faq { background: var(--cream); }
-
-    .faq h2 { margin-bottom: 36px; }
-
-    .faq__list { max-width: 720px; }
-
-    details {
-      border-bottom: 1px solid var(--line-2);
-    }
-
-    details:first-of-type { border-top: 1px solid var(--line-2); }
-
-    summary {
-      padding: 18px 0;
-      font-weight: 500;
-      font-size: 17px;
-      color: var(--plum);
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      list-style: none;
-      min-height: 44px;
-    }
-
-    summary::-webkit-details-marker { display: none; }
-
-    summary::after {
-      content: "+";
-      font-size: 22px;
-      color: var(--mauve);
-      flex-shrink: 0;
-      transition: transform 220ms ease-out;
-      line-height: 1;
-    }
-
-    details[open] summary::after { transform: rotate(45deg); }
-
-    .faq__answer {
-      padding: 0 0 18px;
-      color: var(--plum-soft);
-      font-size: 16px;
-      max-width: 62ch;
-    }
-
-    /* ============================================================
-       FOOTER
-    ============================================================ */
-    .footer {
-      background: var(--plum);
-      padding: 64px 22px 48px;
-    }
-
-    .footer__inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .footer__logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--cream);
-      text-decoration: none;
-      margin-bottom: 36px;
-    }
-
-    .footer__logo-text {
-      font-family: var(--font-serif);
-      font-size: 20px;
-      font-weight: 500;
-      font-style: italic;
-    }
-
-    .footer__help {
-      font-size: 13px;
-      color: var(--line);
-      max-width: 680px;
-      margin-bottom: 36px;
-      line-height: 1.6;
-    }
-
-    .footer__links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 22px;
-      margin-bottom: 48px;
-    }
-
-    .footer__links a {
-      font-size: 14px;
-      color: var(--line);
-      text-decoration: none;
-      min-height: 44px;
-      display: inline-flex;
-      align-items: center;
-    }
-
-    .footer__links a:hover { color: var(--cream); }
-
-    .footer__tagline {
-      font-family: var(--font-serif);
-      font-size: 20px;
-      font-weight: 500;
-      font-style: italic;
-      color: var(--rose);
-      border-top: 1px solid var(--plum-soft);
-      padding-top: 28px;
-    }
-
-    /* ============================================================
-       MOBILE-SPECIFIC TWEAKS (max 480px)
-    ============================================================ */
-    @media (max-width: 480px) {
-      .logo__text { font-size: 17px; }
-      .nav__btn { font-size: 14px; padding: 0 16px; }
-
-      .hero { padding: 56px 22px 64px; }
-      .section { padding: 56px 22px; }
-
-      .form-card { padding: 28px 20px; }
-
-      h3 { font-size: 22px; }
-      .quote__text { font-size: 21px; }
-    }
-  </style>
+/* Plan
+   VOICE occasion, hushed: a tender landing page for tired readers on a phone at night
+   IDEA a real letter that arrives on Sunday morning: envelope, paper, the brand's sunrise line
+   PICTURE a large preview of one Morgenlicht letter, its three parts annotated
+   COLOUR fixed brand palette from DESIGN.md: cream ground, plum fields, berry for actions, rose accent
+   TYPE Cormorant Garamond italic lowercase headings + Jost text
+   LAYOUT laptop: hero = headline + inline signup left, letter right; phone: headline, letter, form */
+:root{color-scheme:light;--plum:#4A2C3D;--plum-soft:#6B4A5D;--mauve:#8A6275;--cream:#FBF4F0;--powder:#F3E6E1;--powder-2:#EEDFD9;--line:#E6D0D8;--line-2:#D9C3CB;--rose:#EBC3BA;--berry:#B8565A;--berry-h:#A44B50;--chat:#E9E2E4;--error:#9E3B3F;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',system-ui,sans-serif}
+*{box-sizing:border-box;min-width:0;margin:0}
+html{overflow-x:clip}
+body{background:var(--cream);color:var(--plum);font:17px/1.65 var(--sans);overflow-x:clip;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--serif);font-weight:500;font-style:italic;text-transform:lowercase}
+h1{font-size:clamp(38px,6vw,62px);line-height:1.02;text-wrap:balance}
+h2{font-size:clamp(32px,5vw,46px);line-height:1.05;text-wrap:balance}
+h3{font-size:26px;line-height:1.1}
+p{text-wrap:pretty}
+a{color:inherit}
+.band{padding-block:clamp(56px,8vw,96px);padding-left:max(5vw,16px,env(safe-area-inset-left,0px));padding-right:max(5vw,16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1100px;margin:0 auto}
+.lab{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--plum-soft);display:block;margin-bottom:14px}
+.dark .lab,.hero .lab{color:var(--rose)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 30px;border-radius:999px;background:var(--berry);color:var(--cream);font:500 17px/1 var(--sans);text-decoration:none;border:0;cursor:pointer;transition:background .2s}
+.btn:hover{background:var(--berry-h)}
+.btn:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible,button:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
+.btn--rose{background:var(--rose);color:var(--plum)}
+.btn--rose:hover{background:var(--powder-2)}
+.muted{color:var(--plum-soft)}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--plum);color:var(--cream);border-bottom:1px solid var(--plum-soft);padding-left:max(5vw,16px,env(safe-area-inset-left,0px));padding-right:max(5vw,16px,env(safe-area-inset-right,0px))}
+.nav__in{max-width:1100px;margin:0 auto;height:64px;display:flex;align-items:center;gap:20px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font:italic 500 20px var(--serif)}
+.nav ul{display:flex;gap:4px;list-style:none;padding:0;margin-left:auto}
+.nav ul a{display:block;padding:8px 12px;border-radius:10px;font-size:15px;color:var(--line);text-decoration:none}
+.nav ul a:hover{background:var(--plum-soft);color:var(--cream)}
+.nav .btn{min-height:44px;padding:0 20px;font-size:15px}
+@media(max-width:820px){.nav ul{display:none}.nav .btn{margin-left:auto}}
+@media(max-width:400px){.logo span{font-size:17px}.nav .btn{padding:0 14px;font-size:14px}}
+
+/* hero */
+.hero{background:var(--plum);color:var(--cream);padding-top:clamp(40px,6vw,80px)}
+.hero__grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(32px,5vw,72px);align-items:center}
+.hero p.lead{color:var(--line);font-size:18px;max-width:52ch;margin-top:22px}
+.signup{margin-top:32px;display:grid;gap:12px;max-width:500px}
+.signup__row{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:10px}
+.field{display:grid;gap:6px}
+.field label{font-size:14px;font-weight:500;color:var(--cream)}
+.field input{height:52px;border-radius:14px;border:1.5px solid var(--plum-soft);background:var(--cream);color:var(--plum);font:16px var(--sans);padding:0 16px;width:100%}
+.field input:focus{border-color:var(--rose);outline:3px solid var(--rose);outline-offset:0}
+.field input.err{border-color:#e7a3a6}
+.consent{display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.55;color:var(--line);cursor:pointer}
+.consent input{appearance:none;width:22px;height:22px;flex:none;border:1.5px solid var(--rose);border-radius:6px;margin-top:1px;cursor:pointer}
+.consent input:checked{background:var(--rose) url("data:image/svg+xml,%3Csvg viewBox='0 0 14 11' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 5.5L5 9.5L13 1.5' stroke='%234A2C3D' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") center/12px no-repeat}
+.consent a{color:var(--rose)}
+.trust{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--rose)}
+.trust span{display:inline-flex;align-items:center;gap:6px}
+.trust span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--rose)}
+.msg{font-size:14px;border-radius:14px;padding:14px 16px;background:var(--plum-soft);color:var(--cream)}
+.msg.bad{background:#F8E3E3;color:var(--error)}
+@media(max-width:860px){.hero__grid{grid-template-columns:minmax(0,1fr)}.letter-wrap{order:2}.hero__text{order:1}}
+@media(max-width:520px){.signup__row{grid-template-columns:minmax(0,1fr)}.signup .btn{width:100%}}
+
+/* letter picture */
+.letter-wrap{position:relative;padding:28px 0 0}
+.env{position:absolute;inset:auto 4% -18px 10%;height:70%;background:var(--rose);border-radius:16px;transform:rotate(4deg)}
+.letter{position:relative;background:var(--cream);color:var(--plum);border-radius:14px;padding:30px 28px 26px;box-shadow:0 20px 40px rgba(20,10,16,.28);transform:rotate(-1.5deg);display:grid;gap:14px;max-width:470px;margin-left:auto}
+.letter__top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px;font-size:13px;color:var(--plum-soft)}
+.letter__top b{font:italic 500 24px var(--serif);color:var(--plum)}
+.part{display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px;align-items:start}
+.part i{font:500 26px/1 var(--serif);color:var(--berry);font-style:normal}
+.part strong{display:block;font:italic 500 20px/1.15 var(--serif)}
+.part p{font-size:14px;line-height:1.5;color:var(--plum-soft)}
+.letter__end{font:italic 500 19px var(--serif);color:var(--plum-soft);border-top:1px solid var(--line);padding-top:12px}
+.sample{font-size:13px;color:var(--rose);text-align:right;margin-top:30px}
+
+/* recognise */
+.rec__grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,80px);align-items:start}
+.checks{list-style:none;padding:0;border-top:1px solid var(--line)}
+.checks label{display:flex;gap:14px;align-items:flex-start;padding:14px 4px;border-bottom:1px solid var(--line);cursor:pointer;min-height:44px}
+.checks input{appearance:none;width:20px;height:20px;flex:none;border:1.5px solid var(--mauve);border-radius:5px;margin-top:4px;cursor:pointer;transition:background .2s}
+.checks input:checked{background:var(--mauve) url("data:image/svg+xml,%3Csvg viewBox='0 0 14 11' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 5.5L5 9.5L13 1.5' stroke='%23FBF4F0' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") center/11px no-repeat}
+.answer{margin-top:24px;background:var(--powder);border-radius:18px;padding:22px 24px;display:grid;gap:14px;justify-items:start}
+.answer p{font:italic 500 23px/1.25 var(--serif)}
+@media(max-width:860px){.rec__grid{grid-template-columns:minmax(0,1fr)}}
+
+/* what */
+.powder{background:var(--powder)}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:44px}
+.step{background:var(--cream);border-radius:22px;padding:28px 26px;display:grid;gap:12px;align-content:start}
+.step b{font:500 44px/1 var(--serif);color:var(--berry)}
+.step p{font-size:16px;color:var(--plum-soft)}
+.week{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;font-size:15px;color:var(--plum-soft)}
+.week svg{flex:none}
+@media(max-width:860px){.steps{grid-template-columns:minmax(0,1fr)}}
+
+/* about */
+.dark{background:var(--plum);color:var(--cream)}
+.about__grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,80px);align-items:center}
+.portrait{aspect-ratio:3/4;max-width:340px;width:100%;border-radius:140px 140px 22px 22px;background:var(--powder-2);border:1px dashed var(--mauve);display:grid;place-items:center;color:var(--mauve);font-size:14px}
+.about p{color:var(--line);max-width:58ch;margin-top:16px}
+.sig{font:italic 500 26px var(--serif);color:var(--rose);margin-top:18px}
+@media(max-width:760px){.about__grid{grid-template-columns:minmax(0,1fr)}.portrait{max-width:260px}}
+
+/* quotes */
+.quotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:40px}
+.quote{background:var(--powder);border-radius:22px;padding:28px 26px;display:grid;gap:16px;align-content:space-between}
+.quote p{font:italic 500 23px/1.25 var(--serif)}
+.quote span{font-size:14px;color:var(--plum-soft)}
+@media(max-width:860px){.quotes{grid-template-columns:minmax(0,1fr)}}
+
+/* faq + final */
+.faq__grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,80px)}
+details{border-bottom:1px solid var(--line-2)}
+details:first-child{border-top:1px solid var(--line-2)}
+summary{padding:18px 0;font-weight:500;cursor:pointer;display:flex;justify-content:space-between;gap:16px;list-style:none;min-height:44px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:22px;line-height:1;color:var(--mauve);transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding-bottom:18px;color:var(--plum-soft);font-size:16px;max-width:60ch}
+.final{margin-top:40px;background:var(--powder);border-radius:22px;padding:26px;display:grid;gap:14px;justify-items:start}
+.final p{font:italic 500 26px/1.2 var(--serif)}
+@media(max-width:860px){.faq__grid{grid-template-columns:minmax(0,1fr)}}
+
+/* footer */
+.foot{background:var(--plum);color:var(--line);padding-bottom:calc(48px + env(safe-area-inset-bottom,0px))}
+.foot__grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:start}
+.help{background:var(--plum-soft);border-radius:16px;padding:20px 22px;font-size:14px;line-height:1.6;max-width:640px;margin-top:28px}
+.help b{display:block;font-size:12px;letter-spacing:.18em;font-weight:400;color:var(--rose);margin-bottom:6px}
+.foot nav{display:flex;gap:22px}
+.foot nav a{font-size:14px;text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
+.tag{font:italic 500 22px var(--serif);color:var(--rose);border-top:1px solid var(--plum-soft);padding-top:24px;margin-top:36px}
+@media(max-width:600px){.foot__grid{grid-template-columns:minmax(0,1fr)}}
+
+/* mobile sticky cta */
+.stick{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px max(16px,env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px));background:var(--cream);border-top:1px solid var(--line);display:none;transition:transform .3s ease-out}
+.stick .btn{width:100%}
+.stick.off{transform:translateY(110%)}
+@media(max-width:700px){.stick{display:block}body{padding-bottom:76px}}
+/* motion: base styles are the final state, animations only play the way in */
+@keyframes fadeup{from{opacity:0;transform:translateY(8px)}}
+@keyframes draw{from{stroke-dashoffset:1}}
+@keyframes rise{from{transform:translateY(70px);opacity:0}}
+@keyframes slide{from{transform:translateY(46px) rotate(2deg);opacity:0}}
+@keyframes pop{50%{transform:scale(1.18)}}
+@keyframes dot{50%{transform:translateY(-4px);opacity:.45}}
+@keyframes drop{from{transform:translateY(-34px)}}
+@keyframes flap{from{transform:scaleY(-1)}}
+@keyframes glow{from{opacity:0;transform:translateY(16px)}}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:var(--rose);transform:scaleX(0);transform-origin:left}
+.sunrise{position:absolute;right:-8%;top:-8%;width:96%;pointer-events:none;overflow:visible}
+.sunrise path{stroke-dasharray:1;animation:draw 1.3s ease-out .15s both}
+.sunrise .arc{animation-duration:1.5s;animation-delay:.5s}
+.sunrise .sun{transform-box:fill-box;animation:rise 2s cubic-bezier(.2,.7,.2,1) .8s both}
+.letter{animation:slide .9s ease-out 1.3s both}
+.part{animation:fadeup .5s ease-out both}
+.part:nth-of-type(2){animation-delay:1.9s}.part:nth-of-type(3){animation-delay:2.15s}.part:nth-of-type(4){animation-delay:2.4s}
+.letter__end{animation:fadeup .6s ease-out 2.7s both}
+.checks input:checked{animation:pop .28s ease-out}
+.checks label:has(input:checked){color:var(--plum)}
+.answer:not([hidden]){animation:fadeup .45s ease-out both}
+.rv{opacity:0;transform:translateY(10px);transition:opacity .6s ease-out,transform .6s ease-out}
+.rv.in{opacity:1;transform:none}
+/* chat tool */
+.chat__grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,80px);align-items:start}
+.picks{display:grid;gap:10px;margin-top:26px}
+.hint{font-size:14px;color:var(--plum-soft)}
+.pick{text-align:left;background:var(--cream);border:1.5px solid var(--line-2);border-radius:16px;padding:14px 18px;font:italic 16px/1.45 var(--sans);color:var(--plum-soft);cursor:pointer;min-height:52px;transition:border-color .2s,background .2s,color .2s}
+.pick:hover{border-color:var(--mauve)}
+.pick[aria-pressed=true]{border-color:var(--plum);background:#fff;color:var(--plum)}
+.phone{background:#fff;border-radius:30px;padding:18px 18px 22px;display:grid;gap:10px;align-content:start;min-height:430px;border:1px solid var(--line);max-width:470px;width:100%;justify-self:center}
+.phone__bar{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--plum-soft);border-bottom:1px solid var(--line);padding:2px 4px 12px;margin-bottom:6px}
+.phone__bar i{width:30px;height:30px;border-radius:50%;background:var(--chat,#E9E2E4)}
+.bl{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--plum-soft);margin-top:6px}
+.bl.r{text-align:right}
+.bub{max-width:86%;padding:14px 18px;font-size:16px;line-height:1.5}
+.bub.inc{background:var(--chat);font-style:italic;color:var(--plum-soft);border-radius:22px 22px 22px 6px}
+.bub.out{background:var(--plum);color:var(--cream);border-radius:22px 22px 6px 22px;justify-self:end}
+.bub.none{background:transparent;border:1px dashed var(--mauve);color:var(--plum-soft);border-radius:22px 22px 6px 22px;justify-self:end;font-size:15px}
+.typing{justify-self:end;background:var(--plum);border-radius:22px 22px 6px 22px;padding:17px 20px;display:flex;gap:6px}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--rose);animation:dot .9s ease-in-out 2}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+.why{font-size:14px;line-height:1.55;color:var(--plum-soft);background:var(--powder);border-radius:14px;padding:12px 14px;margin-top:6px}
+.why b{font-weight:500;color:var(--plum)}
+.anim{animation:fadeup .4s ease-out both}
+@media(max-width:860px){.chat__grid{grid-template-columns:minmax(0,1fr)}}
+#der-brief .step{background:var(--powder)}
+/* success */
+.sent{display:grid;gap:14px;justify-items:start}
+.sent p{font:italic 500 26px/1.2 var(--serif);color:var(--cream)}
+.sent span{font-size:15px;color:var(--line);max-width:46ch}
+.s-let{animation:drop .9s cubic-bezier(.5,0,.7,1) .15s both}
+.s-flap{transform-origin:80px 50px;animation:flap .5s ease-out 1.05s both}
+.s-sun{transform-box:fill-box;animation:glow 1.1s ease-out 1.5s both}
+/* footer horizon */
+.tagline{margin-top:36px}
+.tagline .ln{height:1px;background:var(--plum-soft);transform:scaleX(0);transform-origin:left;transition:transform 1.4s ease-out}
+.tagline .sn{display:block;width:12px;height:12px;border-radius:50%;background:var(--rose);margin:-6px 8% 0 auto;opacity:0;transform:translateY(12px);transition:opacity .7s ease-out 1.1s,transform .7s ease-out 1.1s}
+.tagline.in .ln{transform:none}
+.tagline.in .sn{opacity:1;transform:none}
+.tagline .tag{border:0;margin-top:0;padding-top:22px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}.rv{opacity:1;transform:none}}
+</style>
 </head>
 <body>
 
-  <!-- ============================================================
-       NAV
-  ============================================================ -->
-  <nav class="nav" aria-label="Hauptnavigation">
-    <div class="nav__inner">
-      <a href="#" class="logo" aria-label="raus aus dem gift – Startseite">
-        <svg viewBox="0 0 100 60" width="38" height="23" fill="none" stroke-linecap="round" aria-hidden="true">
-          <path d="M14 50H86" stroke="currentColor" stroke-width="4"/>
-          <path d="M30 50A20 20 0 0 1 62 34" stroke="currentColor" stroke-width="4"/>
-          <circle cx="72" cy="20" r="6.5" fill="#EBC3BA"/>
-        </svg>
-        <span class="logo__text">raus aus dem gift</span>
-      </a>
-      <ul class="nav__links" role="list" aria-label="Seitenabschnitte">
-        <li><a href="#fuer-wen" class="nav__link">für wen?</a></li>
-        <li><a href="#was-erwartet-mich" class="nav__link">der brief</a></li>
-        <li><a href="#ueber-verena" class="nav__link">über Verena</a></li>
-        <li><a href="#faq" class="nav__link">fragen</a></li>
+
+<nav class="nav" aria-label="Hauptnavigation">
+  <div class="nav__in">
+    <a href="#top" class="logo" aria-label="raus aus dem gift, Startseite">
+      <svg viewBox="0 0 100 60" width="38" height="23" fill="none" stroke-linecap="round" aria-hidden="true"><path d="M14 50H86" stroke="currentColor" stroke-width="4"/><path d="M30 50A20 20 0 0 1 62 34" stroke="currentColor" stroke-width="4"/><circle cx="72" cy="20" r="6.5" fill="#EBC3BA"/></svg>
+      <span>raus aus dem gift</span>
+    </a>
+    <ul>
+      <li><a href="#fuer-wen">für wen?</a></li>
+      <li><a href="#der-brief">der brief</a></li>
+      <li><a href="#ueber-verena">über Verena</a></li>
+      <li><a href="#faq">fragen</a></li>
+    </ul>
+    <a href="#newsletter-form" class="btn btn--rose">Kostenlos lesen</a>
+  </div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+</nav>
+
+<header class="band hero" id="top">
+  <div class="wrap hero__grid">
+    <div class="hero__text">
+      <span class="lab">Morgenlicht · dein Brief für den Sonntagmorgen</span>
+      <h1>du grübelst nachts, ob du das problem bist?</h1>
+      <p class="lead">Jeden Sonntag schreibe ich dir einen Brief: eine klare Erklärung, was in toxischen Mustern passiert, ein kleines Werkzeug für die Woche und die Erinnerung, dass du nicht allein bist.</p>
+      <form class="signup" id="newsletter-form" novalidate>
+        <div class="signup__row">
+          <div class="field"><label for="vn">Vorname</label><input id="vn" name="vorname" autocomplete="given-name" required aria-describedby="form-msg"></div>
+          <div class="field"><label for="em">E-Mail-Adresse</label><input id="em" name="email" type="email" autocomplete="email" required aria-describedby="form-msg"></div>
+        </div>
+        <label class="consent"><input type="checkbox" id="ok" name="consent" aria-describedby="form-msg"> <span>Ja, schick mir Morgenlicht per E-Mail. Ich kann mich jederzeit abmelden. Mehr in der <a href="/datenschutz">Datenschutzerklärung</a>.</span></label>
+        <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label for="website">Bitte leer lassen</label><input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>
+        <button class="btn" type="submit">Ja, schick mir den nächsten Brief</button>
+        <div id="form-msg" aria-live="polite"></div>
+        <div class="trust"><span>Kostenlos</span><span>Einmal pro Woche</span><span>Abmelden mit einem Klick</span></div>
+      </form>
+    </div>
+    <div class="letter-wrap" aria-label="Vorschau auf einen Morgenlicht-Brief">
+      <svg class="sunrise" viewBox="0 0 100 70" fill="none" stroke-linecap="round" aria-hidden="true">
+        <circle class="sun" cx="70" cy="20" r="11" fill="#EBC3BA"/>
+        <path d="M4 62H96" pathLength="1" stroke="#6B4A5D" stroke-width="1.2"/>
+        <path class="arc" d="M22 62A28 28 0 0 1 66 39" pathLength="1" stroke="#6B4A5D" stroke-width="1.2"/>
+      </svg>
+      <div class="env" aria-hidden="true"></div>
+      <article class="letter">
+        <div class="letter__top"><b>morgenlicht</b><span>Sonntag, 7:00 Uhr</span></div>
+        <div class="part"><i>1</i><div><strong>warum du dich entschuldigst, obwohl du nichts getan hast</strong><p>Was hinter dem ständigen Schuldgefühl steckt, in einfachen Worten erklärt.</p></div></div>
+        <div class="part"><i>2</i><div><strong>werkzeug: der satz für die nächste nachricht</strong><p>„Ich habe deine Nachricht gelesen. Zur Übergabe am Freitag: 17 Uhr passt.“</p></div></div>
+        <div class="part"><i>3</i><div><strong>du bildest dir das nicht ein</strong><p>Ein paar Zeilen nur für dich, zum Durchatmen.</p></div></div>
+        <p class="letter__end">Pass gut auf dich auf. Deine Verena Maria</p>
+      </article>
+      <p class="sample">Beispiel aus einem Brief</p>
+    </div>
+  </div>
+</header>
+
+<section class="band" id="fuer-wen">
+  <div class="wrap rec__grid">
+    <div>
+      <span class="lab">Erkennst du dich?</span>
+      <h2>du gibst alles, und trotzdem ist es nie genug</h2>
+      <p class="muted" style="margin-top:18px;max-width:46ch">Vielleicht ist es schon vorbei. Vielleicht steckst du noch mittendrin. Beides darf hier sein. Hak ab, was zu dir passt.</p>
+    </div>
+    <div>
+      <ul class="checks" id="checks">
+        <li><label><input type="checkbox"> Du fragst dich, ob du selbst das Problem warst oder bist.</label></li>
+        <li><label><input type="checkbox"> Du weißt nicht mehr, was in einer Beziehung „normal“ ist.</label></li>
+        <li><label><input type="checkbox"> Du erschöpfst dich damit, die Kinder aus dem Konflikt rauszuhalten.</label></li>
+        <li><label><input type="checkbox"> Auf gute Tage folgen ohne Warnung schlechte, und du weißt nicht, warum.</label></li>
+        <li><label><input type="checkbox"> Eine einzige Nachricht wirft dich um Tage zurück.</label></li>
       </ul>
-      <div class="nav__end">
-        <a href="#newsletter-form" class="btn btn--secondary nav__btn">Morgenlicht lesen</a>
-        <button class="nav__hamburger" aria-expanded="false" aria-controls="nav-mobile-menu" aria-label="Menü öffnen">
-          <span class="ham-bar"></span>
-          <span class="ham-bar"></span>
-          <span class="ham-bar"></span>
-        </button>
+      <div class="answer" id="answer" hidden>
+        <p id="answer-t"></p>
+        <a href="#newsletter-form" class="btn">Ja, schick mir Morgenlicht</a>
       </div>
     </div>
-    <div class="nav__mobile-menu" id="nav-mobile-menu" aria-hidden="true">
-      <ul class="nav__mobile-list" role="list">
-        <li><a href="#fuer-wen" class="nav__mobile-link">für wen?</a></li>
-        <li><a href="#was-erwartet-mich" class="nav__mobile-link">der brief</a></li>
-        <li><a href="#ueber-verena" class="nav__mobile-link">über Verena</a></li>
-        <li><a href="#faq" class="nav__mobile-link">fragen</a></li>
-      </ul>
-      <a href="#newsletter-form" class="btn nav__mobile-btn">Jetzt kostenlos anmelden</a>
-    </div>
-  </nav>
+  </div>
+</section>
 
-  <!-- ============================================================
-       HERO
-  ============================================================ -->
-  <section class="hero">
-    <div class="hero__inner">
-      <span class="label label--light fade">Newsletter · Morgenlicht</span>
-      <h1 class="fade">du grübelst nachts, ob du das problem bist?<br>jeden sonntag ein brief, der dir hilft, klar zu sehen</h1>
-      <p class="hero__text fade">Morgenlicht ist mein kostenloser Brief für alle, die eine toxische Beziehung erlebt haben oder noch mittendrin stecken. Jeden Sonntag bekommst du drei Dinge: eine klare Erklärung, was in solchen Mustern passiert, ein kleines Werkzeug für die Woche und die Erinnerung, dass du nicht allein bist.</p>
-      <div class="hero__cta-group fade">
-        <a href="#newsletter-form" class="btn btn--rose">Ja, schick mir den nächsten Brief</a>
-        <span class="hero__note">Kostenlos · Jederzeit abmeldbar · Kein Spam</span>
+<section class="band powder" id="werkzeug">
+  <div class="wrap chat__grid">
+    <div>
+      <span class="lab">Ein Werkzeug aus dem Brief</span>
+      <h2>was antwortest du auf so eine nachricht?</h2>
+      <p class="muted" style="margin-top:18px;max-width:46ch">In jedem Brief steckt etwas für den Alltag. Zum Beispiel Antworten, die ruhig bleiben, auch wenn die Nachricht es nicht ist.</p>
+      <div class="picks" id="picks" role="group" aria-label="Beispielnachricht wählen">
+        <span class="hint">Tippe eine Nachricht an:</span>
       </div>
     </div>
-  </section>
+    <div class="phone" aria-live="polite">
+      <div class="phone__bar"><i aria-hidden="true"></i><span>Nachrichten</span></div>
+      <div id="thread" style="display:grid;gap:10px"></div>
+    </div>
+  </div>
+</section>
 
-  <!-- ============================================================
-       PROBLEM
-  ============================================================ -->
-  <section class="section problem" id="fuer-wen">
-    <div class="container">
-      <div class="text-col">
-        <span class="label fade">Erkennst du dich?</span>
-        <h2 class="fade">du gibst alles, und trotzdem ist es nie genug</h2>
-        <p class="problem__intro fade">Vielleicht ist es schon vorbei. Vielleicht steckst du noch mittendrin. Beides darf hier sein. Wenn du bei einem dieser Sätze nickst, schreibe ich Morgenlicht für dich:</p>
-        <ul class="checklist fade" role="list">
-          <li class="checklist__item">
-            <span class="checklist__box" aria-hidden="true"></span>
-            <span>Du fragst dich, ob du selbst das Problem warst – oder bist.</span>
-          </li>
-          <li class="checklist__item">
-            <span class="checklist__box" aria-hidden="true"></span>
-            <span>Du weißt nicht mehr, was in einer Beziehung „normal“ ist.</span>
-          </li>
-          <li class="checklist__item">
-            <span class="checklist__box" aria-hidden="true"></span>
-            <span>Du erschöpfst dich damit, die Kinder aus dem Konflikt rauszuhalten.</span>
-          </li>
-          <li class="checklist__item">
-            <span class="checklist__box" aria-hidden="true"></span>
-            <span>Auf gute Tage folgen ohne Warnung schlechte – und du weißt nicht, warum.</span>
-          </li>
-          <li class="checklist__item">
-            <span class="checklist__box" aria-hidden="true"></span>
-            <span>Du willst stark sein, aber eine einzige Nachricht wirft dich zurück.</span>
-          </li>
-        </ul>
-        <a href="#newsletter-form" class="btn fade">Ja, das bin ich – schick mir Morgenlicht</a>
+<section class="band" id="der-brief">
+  <div class="wrap">
+    <span class="lab">Der Brief</span>
+    <h2>drei dinge, jeden sonntag</h2>
+    <p class="muted" style="margin-top:14px;max-width:58ch">Kein Magazin, kein Kurs. Ein Brief von mir an dich, in fünf Minuten gelesen.</p>
+    <div class="steps">
+      <div class="step"><b>1</b><span class="lab" style="margin:0">Orientierung</span><h3>du verstehst, was passiert ist</h3><p>Warum du an dir zweifelst, warum du nicht einfach gehen konntest und warum sich alles so verwirrend anfühlt.</p></div>
+      <div class="step"><b>2</b><span class="lab" style="margin:0">Werkzeug</span><h3>du bekommst etwas für die woche</h3><p>Eine kleine Übung, eine Formulierung für die nächste schwierige Nachricht oder eine Checkliste. Sofort anwendbar.</p></div>
+      <div class="step"><b>3</b><span class="lab" style="margin:0">Begleitung</span><h3>du bist nicht allein damit</h3><p>Was du erlebt hast, ist real. Du bildest dir das nicht ein. Und es gibt einen Weg heraus.</p></div>
+    </div>
+    <div class="week">
+      <svg viewBox="0 0 100 60" width="34" height="20" fill="none" stroke-linecap="round" aria-hidden="true"><path d="M14 50H86" stroke="#8A6275" stroke-width="4"/><path d="M30 50A20 20 0 0 1 62 34" stroke="#8A6275" stroke-width="4"/><circle cx="72" cy="20" r="6.5" fill="#EBC3BA"/></svg>
+      <span>Nach der Anmeldung: Bestätigungsmail öffnen, Link klicken, am Sonntag kommt dein erster Brief.</span>
+    </div>
+  </div>
+</section>
+
+<section class="band dark about" id="ueber-verena">
+  <div class="wrap about__grid">
+    <div class="portrait" role="img" aria-label="Foto von Verena Maria (Platzhalter)">[FOTO VERENA MARIA]</div>
+    <div>
+      <span class="lab">Über mich</span>
+      <h2>ich bin Verena Maria</h2>
+      <p>Ich weiß, wie es sich anfühlt, wenn du nicht mehr weißt, wo du aufhörst und das Gift anfängt. Ich habe es selbst erlebt, als Frau, als Mutter, als Mensch.</p>
+      <p>Heute begleite ich Menschen auf Instagram (<strong style="font-weight:500;color:var(--cream)">@raus_aus_dem_gift</strong>) und in diesem Brief dabei, sich selbst zurückzufinden. Schritt für Schritt, ohne Druck.</p>
+      <p class="sig">Deine Verena Maria</p>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <span class="lab">Was Leserinnen sagen</span>
+    <h2>worte, die ankommen</h2>
+    <div class="quotes">
+      <figure class="quote"><p>„Ich habe Morgenlicht sonntags geöffnet und zum ersten Mal seit Monaten nicht geweint. Sondern geatmet.“</p><span>Sarah, 38, Mutter von zwei Kindern</span></figure>
+      <figure class="quote"><p>„Verena schreibt so, als wäre sie dabei gewesen. Ich habe jeden Satz gebraucht.“</p><span>Michael, 44</span></figure>
+      <figure class="quote"><p>„Endlich jemand, der nicht übertreibt und nicht beschönigt. Nur erklärt.“</p><span>Julia, 31</span></figure>
+    </div>
+  </div>
+</section>
+
+<section class="band powder" id="faq">
+  <div class="wrap faq__grid">
+    <div>
+      <span class="lab">Fragen &amp; Antworten</span>
+      <h2>bevor du dich einträgst</h2>
+      <div class="final" style="background:var(--cream)">
+        <p>dein nächster brief kommt am sonntag.</p>
+        <a href="#newsletter-form" class="btn">Ja, schick ihn mir</a>
       </div>
     </div>
-  </section>
-
-  <!-- ============================================================
-       WHAT YOU GET
-  ============================================================ -->
-  <section class="section what-you-get" id="was-erwartet-mich">
-    <div class="container">
-      <span class="label fade">Der Brief</span>
-      <h2 class="fade">drei dinge, die du jeden sonntag bekommst</h2>
-      <p class="what-you-get__intro fade">Morgenlicht ist kein Magazin und kein Kurs. Es ist ein Brief von mir an dich, jeden Sonntagmorgen in deinem Postfach.</p>
-      <div class="cards">
-        <div class="card fade">
-          <span class="card__label">01 · Orientierung</span>
-          <h3 class="card__title">du verstehst, was passiert ist</h3>
-          <p class="card__text">Ich erkläre dir in einfachen Worten, was in toxischen Beziehungsmustern passiert: warum du an dir zweifelst, warum du nicht einfach gehen konntest und warum sich alles so verwirrend anfühlt.</p>
-        </div>
-        <div class="card fade">
-          <span class="card__label">02 · Werkzeug</span>
-          <h3 class="card__title">du bekommst ein werkzeug für die woche</h3>
-          <p class="card__text">Eine kleine Übung, eine Formulierung für die nächste schwierige Nachricht oder eine Checkliste. Nichts Aufwändiges, sondern etwas, das du sofort anwenden kannst.</p>
-        </div>
-        <div class="card fade">
-          <span class="card__label">03 · Begleitung</span>
-          <h3 class="card__title">du bist nicht allein damit</h3>
-          <p class="card__text">Jeder Brief erinnert dich daran: Was du erlebt hast, ist real. Du bildest dir das nicht ein. Und es gibt einen Weg heraus.</p>
-        </div>
-      </div>
+    <div>
+      <details open><summary>Ist Morgenlicht wirklich kostenlos?</summary><p>Ja, vollständig. Jeden Sonntag ein Brief, ohne Kosten und ohne versteckte Angebote.</p></details>
+      <details><summary>Wie oft kommt der Brief?</summary><p>Einmal pro Woche, sonntagmorgens. Dann, wenn es meistens etwas ruhiger ist.</p></details>
+      <details><summary>Ich habe keine Bestätigungsmail bekommen.</summary><p>Schau bitte im Spam- oder Werbung-Ordner nach. Die Mail kommt von mail@rausausdemgift.de. Ist sie nach zehn Minuten nicht da, schreib mir an diese Adresse.</p></details>
+      <details><summary>Kann ich mich jederzeit abmelden?</summary><p>Ja. In jedem Brief ist ein Abmeldelink. Ein Klick genügt.</p></details>
+      <details><summary>Ist das ein Therapieangebot?</summary><p>Nein. Morgenlicht ist ein persönlicher Brief, keine Therapie und keine Beratung.</p></details>
+      <details><summary>Was passiert mit meiner E-Mail-Adresse?</summary><p>Ich nutze sie nur, um dir Morgenlicht zu schicken. Ich gebe sie nicht weiter.</p></details>
+      <details><summary>Passt meine Situation überhaupt?</summary><p>Morgenlicht ist für alle, die toxische Muster in Partnerschaft, Familie oder Freundschaft erlebt haben oder gerade erleben. Du musst dir über nichts sicher sein, um dich anzumelden.</p></details>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ============================================================
-       ABOUT
-  ============================================================ -->
-  <section class="section about" id="ueber-verena">
-    <div class="container">
-      <div class="about__grid">
-        <div
-          class="about__portrait fade"
-          role="img"
-          aria-label="Foto von Verena Maria (Platzhalter – eigenes Foto einsetzen)"
-        >
-          [FOTO VERENA MARIA]
-        </div>
-        <div>
-          <span class="label label--light fade">Über mich</span>
-          <h2 class="fade">ich bin Verena Maria</h2>
-          <p class="about__text fade">Ich weiß, wie es sich anfühlt, wenn du nicht mehr weißt, wo du aufhörst und das Gift anfängt. Ich habe es selbst erlebt – als Frau, als Mutter, als Mensch.</p>
-          <p class="about__text fade">Heute begleite ich Menschen auf Instagram (<strong>@raus_aus_dem_gift</strong>) und in diesem Brief dabei, sich selbst zurückzufinden. Schritt für Schritt, ohne Druck.</p>
-          <p class="about__signature fade">Deine Verena Maria</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       TESTIMONIALS
-  ============================================================ -->
-  <section class="section testimonials">
-    <div class="container">
-      <span class="label fade">Was Leserinnen sagen</span>
-      <h2 class="fade">worte, die ankommen</h2>
-      <div class="quotes">
-        <div class="quote fade">
-          <p class="quote__text">„Ich habe Morgenlicht sonntags geöffnet und zum ersten Mal seit Monaten nicht geweint. Sondern geatmet."</p>
-          <span class="quote__author">Sarah, 38, Mutter von zwei Kindern</span>
-        </div>
-        <div class="quote fade">
-          <p class="quote__text">„Verena schreibt so, als wäre sie dabei gewesen. Ich habe jeden Satz gebraucht."</p>
-          <span class="quote__author">Michael, 44</span>
-        </div>
-        <div class="quote fade">
-          <p class="quote__text">„Endlich jemand, der nicht übertreibt und nicht beschönigt. Nur erklärt. Das hat mir so gefehlt."</p>
-          <span class="quote__author">Julia, 31</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       CTA STRIP
-  ============================================================ -->
-  <section class="cta-strip">
-    <div class="container">
-      <h2 class="fade">dein nächster brief kommt am sonntag</h2>
-      <p class="cta-strip__text fade">Trag dich ein, und er landet direkt in deinem Postfach. Kostenlos und mit einem Klick wieder abbestellt.</p>
-      <a href="#newsletter-form" class="btn btn--rose fade">Ja, schick mir den nächsten Brief</a>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       FORM
-  ============================================================ -->
-  <section class="section form-section" id="newsletter-form">
-    <div class="container">
-      <div class="text-col">
-        <span class="label fade">Newsletter · Morgenlicht</span>
-        <h2 class="fade">hol dir morgenlicht in dein postfach</h2>
-        <p class="form-section__intro fade">Kostenlos, jeden Sonntagmorgen. Nach der Anmeldung bekommst du eine kurze Bestätigungsmail. Abmelden geht jederzeit mit einem Klick.</p>
-
-        <div class="form-card fade">
-          <form id="brevo-form" novalidate>
-            <div class="form__group">
-              <label class="form__label" for="vorname">Dein Vorname</label>
-              <input
-                class="form__input"
-                type="text"
-                id="vorname"
-                name="vorname"
-                autocomplete="given-name"
-                placeholder="Wie heißt du?"
-                aria-describedby="vorname-err"
-              >
-              <span class="form__field-error" id="vorname-err" role="alert">Bitte gib deinen Vornamen ein.</span>
-            </div>
-
-            <div class="form__group">
-              <label class="form__label" for="email">Deine E-Mail-Adresse</label>
-              <input
-                class="form__input"
-                type="email"
-                id="email"
-                name="email"
-                autocomplete="email"
-                placeholder="deine@email.de"
-                aria-describedby="email-err"
-              >
-              <span class="form__field-error" id="email-err" role="alert">Bitte gib eine gültige E-Mail-Adresse ein.</span>
-            </div>
-
-            <div class="form__consent-row">
-              <input
-                class="form__checkbox"
-                type="checkbox"
-                id="consent"
-                name="consent"
-                aria-describedby="consent-err"
-              >
-              <label class="form__consent-label" for="consent">
-                Ich bin damit einverstanden, dass raus aus dem gift mir den Newsletter Morgenlicht per E-Mail zusendet. Ich kann diese Einwilligung jederzeit widerrufen. Mehr dazu in der <a href="/datenschutz">Datenschutzerklärung</a>.
-              </label>
-            </div>
-            <span class="form__field-error" id="consent-err" role="alert" style="display:none; margin-top:-12px; margin-bottom:20px;">Bitte stimme der Datenschutzerklärung zu, um fortzufahren.</span>
-
-            <!-- Honeypot gegen Spam-Bots: für Menschen unsichtbar -->
-            <div aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;">
-              <label for="website">Bitte leer lassen</label>
-              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
-            </div>
-
-            <button type="submit" class="btn form__submit">Ja, schick mir Morgenlicht</button>
-          </form>
-
-          <div class="form__status" id="form-status" aria-live="polite"></div>
-        </div>
-
-        <div class="notice fade">
-          <p class="notice__label">Wichtig</p>
-          <p>Diese Inhalte ersetzen keine rechtliche, psychologische oder therapeutische Beratung. Bei Gewalt oder akuter Gefahr: Polizei 110 · Hilfetelefon Gewalt gegen Frauen 116 016 · Hilfetelefon Gewalt an Männern 0800 1239900 · Nummer gegen Kummer, Elterntelefon 0800 111 0 550.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       FAQ
-  ============================================================ -->
-  <section class="section faq" id="faq">
-    <div class="container">
-      <span class="label fade">Fragen & Antworten</span>
-      <h2 class="fade">häufige fragen</h2>
-      <div class="faq__list fade">
-        <details>
-          <summary>Ist Morgenlicht wirklich kostenlos?</summary>
-          <p class="faq__answer">Ja, vollständig. Du bekommst jeden Sonntag einen Brief von mir – ohne Kosten, ohne versteckte Angebote, ohne Trick.</p>
-        </details>
-        <details>
-          <summary>Wie oft erscheint der Newsletter?</summary>
-          <p class="faq__answer">Einmal pro Woche, sonntagmorgens. Dann, wenn es meistens etwas ruhiger ist.</p>
-        </details>
-        <details>
-          <summary>Ich habe keine Bestätigungsmail bekommen. Was nun?</summary>
-          <p class="faq__answer">Schau bitte im Spam- oder Werbung-Ordner nach. Die Mail kommt von mail@rausausdemgift.de. Ist sie nach zehn Minuten nicht da, schreib mir einfach an diese Adresse.</p>
-        </details>
-        <details>
-          <summary>Kann ich mich jederzeit abmelden?</summary>
-          <p class="faq__answer">Ja. In jedem Brief ist ein Abmeldelink. Ein Klick genügt – keine Fragen, keine Bestätigung.</p>
-        </details>
-        <details>
-          <summary>Ist das ein Therapieangebot?</summary>
-          <p class="faq__answer">Nein. Morgenlicht ist ein persönlicher Brief, keine Therapie und keine Beratung. Bei psychologischer oder rechtlicher Unterstützung wende dich bitte an eine Fachperson.</p>
-        </details>
-        <details>
-          <summary>Was passiert mit meiner E-Mail-Adresse?</summary>
-          <p class="faq__answer">Ich verwende sie ausschließlich, um dir Morgenlicht zu schicken. Ich gebe sie nicht weiter, verkaufe sie nicht. Mehr steht in der <a href="/datenschutz" style="color:var(--berry)">Datenschutzerklärung</a>.</p>
-        </details>
-        <details>
-          <summary>Ich bin nicht sicher, ob meine Situation zu Morgenlicht passt.</summary>
-          <p class="faq__answer">Morgenlicht ist für alle Menschen, die toxische Muster – ob in Partnerschaft, Familie oder Freundschaft – erlebt haben oder gerade erleben. Du musst dir über gar nichts sicher sein, um dich anzumelden.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       FOOTER
-  ============================================================ -->
-  <footer class="footer">
-    <div class="footer__inner">
-      <a href="#" class="footer__logo" aria-label="raus aus dem gift">
-        <svg viewBox="0 0 100 60" width="38" height="23" fill="none" stroke-linecap="round" aria-hidden="true">
-          <path d="M14 50H86" stroke="currentColor" stroke-width="4"/>
-          <path d="M30 50A20 20 0 0 1 62 34" stroke="currentColor" stroke-width="4"/>
-          <circle cx="72" cy="20" r="6.5" fill="#EBC3BA"/>
-        </svg>
-        <span class="footer__logo-text">raus aus dem gift</span>
+<footer class="band foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <a href="#top" class="logo" style="color:var(--cream)" aria-label="raus aus dem gift">
+        <svg viewBox="0 0 100 60" width="38" height="23" fill="none" stroke-linecap="round" aria-hidden="true"><path d="M14 50H86" stroke="currentColor" stroke-width="4"/><path d="M30 50A20 20 0 0 1 62 34" stroke="currentColor" stroke-width="4"/><circle cx="72" cy="20" r="6.5" fill="#EBC3BA"/></svg>
+        <span>raus aus dem gift</span>
       </a>
-
-      <p class="footer__help">
-        Diese Inhalte ersetzen keine rechtliche, psychologische oder therapeutische Beratung. Bei Gewalt oder akuter Gefahr: Polizei 110 · Hilfetelefon Gewalt gegen Frauen 116 016 · Hilfetelefon Gewalt an Männern 0800 1239900 · Nummer gegen Kummer, Elterntelefon 0800 111 0 550.
-      </p>
-
-      <nav class="footer__links" aria-label="Rechtliche Links">
-        <a href="/impressum">Impressum</a>
-        <a href="/datenschutz">Datenschutz</a>
-      </nav>
-
-      <p class="footer__tagline">es war nie zu viel von dir. es war zu viel gift.</p>
+      <nav aria-label="Rechtliches"><a href="/impressum">Impressum</a><a href="/datenschutz">Datenschutz</a></nav>
     </div>
-  </footer>
+    <div class="help"><b>WICHTIG</b>Diese Inhalte ersetzen keine rechtliche, psychologische oder therapeutische Beratung. Bei Gewalt oder akuter Gefahr: Polizei 110 · Hilfetelefon Gewalt gegen Frauen 116 016 · Hilfetelefon Gewalt an Männern 0800 1239900 · Nummer gegen Kummer, Elterntelefon 0800 111 0 550.</div>
+    <div class="tagline" id="tagline"><div class="ln"></div><span class="sn" aria-hidden="true"></span><p class="tag">es war nie zu viel von dir. es war zu viel gift.</p></div>
+  </div>
+</footer>
 
-  <!-- ============================================================
-       SCRIPTS
-  ============================================================ -->
-  <script>
-    /* ----------------------------------------------------------
-       BREVO
-       Die Anmeldung läuft über /api/newsletter.php. Dort liegt der
-       API-Key serverseitig (api/config.php) und Brevo verschickt die
-       Double-Opt-In-Mail. Danach landet der Kontakt in der Liste
-       „Morgenlicht“.
-    ---------------------------------------------------------- */
-    const NEWSLETTER_ENDPOINT = '/api/newsletter.php';
+<div class="stick" id="stick"><a href="#newsletter-form" class="btn">Kostenlos Morgenlicht lesen</a></div>
 
-    /* ----------------------------------------------------------
-       FORM HANDLER
-    ---------------------------------------------------------- */
-    const form       = document.getElementById('brevo-form');
-    const statusEl   = document.getElementById('form-status');
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const vorname = form.vorname.value.trim();
-      const email   = form.email.value.trim();
-      const consent = form.consent.checked;
-
-      // --- Validation ---
-      let valid = true;
-
-      const vornameInput = document.getElementById('vorname');
-      const vornameErr   = document.getElementById('vorname-err');
-      if (!vorname) {
-        vornameInput.classList.add('is-error');
-        vornameErr.classList.add('visible');
-        valid = false;
-      } else {
-        vornameInput.classList.remove('is-error');
-        vornameErr.classList.remove('visible');
-      }
-
-      const emailInput = document.getElementById('email');
-      const emailErr   = document.getElementById('email-err');
-      const emailOk    = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-      if (!emailOk) {
-        emailInput.classList.add('is-error');
-        emailErr.classList.add('visible');
-        valid = false;
-      } else {
-        emailInput.classList.remove('is-error');
-        emailErr.classList.remove('visible');
-      }
-
-      const consentErr = document.getElementById('consent-err');
-      if (!consent) {
-        consentErr.style.display = 'block';
-        valid = false;
-      } else {
-        consentErr.style.display = 'none';
-      }
-
-      if (!valid) return;
-
-      // --- Submit ---
-      const submitBtn = form.querySelector('button[type="submit"]');
-      submitBtn.disabled    = true;
-      submitBtn.textContent = 'Einen Moment …';
-
-      try {
-        const res = await fetch(NEWSLETTER_ENDPOINT, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept':       'application/json'
-          },
-          body: JSON.stringify({
-            vorname: vorname,
-            email:   email,
-            consent: consent,
-            website: form.website.value
-          })
-        });
-
-        const data = await res.json().catch(() => ({}));
-        if (!res.ok || !data.ok) {
-          throw new Error(data.error || `HTTP ${res.status}`);
-        }
-
-        form.style.display = 'none';
-        statusEl.className = 'form__status form__status--success';
-        statusEl.innerHTML = '<strong>Fast geschafft.</strong> Schau in dein Postfach – ich habe dir eine Bestätigungsmail geschickt. Erst wenn du dort auf den Link klickst, bist du dabei. Bis Sonntag!';
-      } catch (err) {
-        statusEl.className   = 'form__status form__status--error';
-        statusEl.textContent = 'Das hat leider nicht geklappt. Bitte versuche es in einem Moment noch einmal. Wenn es weiter hakt, schreib mir an mail@rausausdemgift.de.';
-        submitBtn.disabled    = false;
-        submitBtn.textContent = 'Ja, schick mir Morgenlicht';
-        console.error('Newsletter error:', err);
-      }
-    });
-
-    /* ----------------------------------------------------------
-       HAMBURGER / MOBILE MENU
-    ---------------------------------------------------------- */
-    (function () {
-      const navEl      = document.querySelector('.nav');
-      const hamburger  = document.querySelector('.nav__hamburger');
-      const mobileMenu = document.getElementById('nav-mobile-menu');
-
-      function openMenu() {
-        navEl.classList.add('nav--open');
-        hamburger.setAttribute('aria-expanded', 'true');
-        mobileMenu.setAttribute('aria-hidden', 'false');
-        mobileMenu.classList.add('open');
-      }
-
-      function closeMenu() {
-        navEl.classList.remove('nav--open');
-        hamburger.setAttribute('aria-expanded', 'false');
-        mobileMenu.setAttribute('aria-hidden', 'true');
-        mobileMenu.classList.remove('open');
-      }
-
-      hamburger.addEventListener('click', () => {
-        navEl.classList.contains('nav--open') ? closeMenu() : openMenu();
-      });
-
-      mobileMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', closeMenu);
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && navEl.classList.contains('nav--open')) {
-          closeMenu();
-          hamburger.focus();
-        }
-      });
-    })();
-
-    /* ----------------------------------------------------------
-       FADE-IN INTERSECTION OBSERVER
-    ---------------------------------------------------------- */
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            io.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
-
-      document.querySelectorAll('.fade').forEach(el => io.observe(el));
-    } else {
-      document.querySelectorAll('.fade').forEach(el => el.classList.add('visible'));
+<script>
+{
+  const f=document.getElementById('newsletter-form'),msg=document.getElementById('form-msg');
+  const ENDPOINT='/api/newsletter.php';
+  const btn=f.querySelector('button[type=submit]'),btnText=btn.textContent;
+  const note=(txt,bad)=>{msg.innerHTML='';const d=document.createElement('p');d.className='msg'+(bad?' bad':'');d.textContent=txt;msg.appendChild(d)};
+  f.addEventListener('submit',async e=>{
+    e.preventDefault();
+    const vn=f.querySelector('#vn'),em=f.querySelector('#em'),ok=f.querySelector('#ok');
+    const errs=[];
+    const vnOk=!!vn.value.trim(),mailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim());
+    vn.classList.toggle('err',!vnOk);vn.setAttribute('aria-invalid',!vnOk);if(!vnOk)errs.push('deinen Vornamen');
+    em.classList.toggle('err',!mailOk);em.setAttribute('aria-invalid',!mailOk);if(!mailOk)errs.push('eine gültige E-Mail-Adresse');
+    ok.setAttribute('aria-invalid',!ok.checked);if(!ok.checked)errs.push('dein Einverständnis');
+    if(errs.length){note('Bitte ergänze noch '+errs.join(', ')+'.',true);return}
+    btn.disabled=true;btn.textContent='Einen Moment …';msg.innerHTML='';
+    try{
+      const res=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({vorname:vn.value.trim(),email:em.value.trim(),consent:ok.checked,website:f.querySelector('#website').value})});
+      const data=await res.json().catch(()=>({}));
+      if(!res.ok||!data.ok)throw new Error(data.error||'HTTP '+res.status);
+      f.querySelectorAll('.signup__row,.consent,button,.trust').forEach(x=>x.hidden=true);
+      const s=document.createElement('div');s.className='sent';
+      s.innerHTML='<svg viewBox="0 0 160 110" width="160" height="110" aria-hidden="true"><circle class="s-sun" cx="134" cy="20" r="10" fill="#EBC3BA"/><rect class="s-let" x="44" y="36" width="72" height="50" rx="4" fill="#FBF4F0"/><rect x="30" y="50" width="100" height="56" rx="8" fill="#EBC3BA"/><path d="M32 54L80 84L128 54" stroke="#4A2C3D" stroke-width="1.5" fill="none" stroke-linecap="round"/><path class="s-flap" d="M30 50L80 82L130 50Z" fill="#E3B4AA" stroke="#4A2C3D" stroke-width="1.5" stroke-linejoin="round"/></svg><p></p><span>Schau in dein Postfach und klick auf den Bestätigungslink. Erst dann bist du dabei. Am Sonntag kommt dein erster Brief.</span>';
+      s.querySelector('p').textContent='fast geschafft, '+vn.value.trim()+'.';
+      msg.appendChild(s);
+    }catch(err){
+      note('Das hat leider nicht geklappt. Bitte versuche es in einem Moment noch einmal. Wenn es weiter hakt, schreib mir an mail@rausausdemgift.de.',true);
+      btn.disabled=false;btn.textContent=btnText;console.error('Newsletter error:',err);
     }
-  </script>
+  });
+
+  const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* chat tool: reply appears after a short typing pause */
+  const msgs=[
+    {inc:'Du bist so egoistisch. Die Kinder vermissen mich und du verhinderst das.',out:'Die Kinder sehen dich wie vereinbart am Samstag um 10 Uhr. Ich bringe sie zur Übergabe.',why:'Du gehst nicht auf den Vorwurf ein, sondern bleibst bei dem, was vereinbart ist. Kurz, freundlich, überprüfbar.'},
+    {inc:'Wir müssen reden. Ruf mich sofort an.',out:'Ich habe deine Nachricht gelesen. Wenn es um die Kinder geht, schreib mir bitte hier, worum es konkret geht.',why:'Du bestimmst Weg und Tempo. Schriftlich bleibt alles nachvollziehbar.'},
+    {inc:'Ohne mich schaffst du das sowieso nicht.',none:'Keine Antwort nötig. Diese Nachricht enthält keine Frage.',why:'Nicht jede Nachricht braucht eine Antwort. Schweigen ist hier keine Schwäche, sondern eine Grenze.'}
+  ];
+  const picks=document.getElementById('picks'),thread=document.getElementById('thread');
+  let timers=[];
+  const el=(tag,cls,txt,anim)=>{const e=document.createElement(tag);e.className=cls+(anim?' anim':'');if(txt)e.textContent=txt;thread.appendChild(e);return e};
+  const show=(i,anim)=>{
+    timers.forEach(clearTimeout);timers=[];thread.innerHTML='';
+    picks.querySelectorAll('.pick').forEach((b,j)=>b.setAttribute('aria-pressed',j===i));
+    const m=msgs[i];
+    el('div','bl','Sie/er schreibt');el('div','bub inc',m.inc,anim);
+    const reply=()=>{
+      el('div','bl r','Du antwortest',anim);
+      el('div',m.out?'bub out':'bub none',m.out||m.none,anim);
+      const w=el('div','why','',anim);w.innerHTML='<b>Warum das wirkt:</b> ';w.append(m.why);
+      if(anim)w.style.animationDelay='.35s';
+    };
+    if(!anim||rm){reply();return}
+    const t=el('div','typing','',true);t.innerHTML='<i></i><i></i><i></i>';
+    timers.push(setTimeout(()=>{t.remove();reply()},1700));
+  };
+  msgs.forEach((m,i)=>{const b=document.createElement('button');b.type='button';b.className='pick';b.textContent='„'+m.inc+'“';b.addEventListener('click',()=>show(i,true));picks.appendChild(b)});
+  show(0,false);
+
+  /* gentle reveal below the first screen */
+  const tag=document.getElementById('tagline');
+  if('IntersectionObserver' in window&&!rm){
+    const items=[...document.querySelectorAll('.step,.quote,.portrait,details')].filter(x=>x.getBoundingClientRect().top>innerHeight);
+    items.forEach((x,i)=>{x.classList.add('rv');x.style.transitionDelay=(i%3)*90+'ms'});
+    const rev=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rev.unobserve(e.target)}}),{threshold:.15});
+    items.forEach(x=>rev.observe(x));rev.observe(tag);
+  }else tag.classList.add('in');
+
+  /* morning light progress under the nav */
+  const bar=document.getElementById('progress');
+  const onScroll=()=>{const h=document.documentElement.scrollHeight-innerHeight;bar.style.transform='scaleX('+(h>0?scrollY/h:0)+')'};
+  addEventListener('scroll',()=>requestAnimationFrame(onScroll),{passive:true});onScroll();
+
+  const stick=document.getElementById('stick');
+  if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>{stick.classList.toggle('off',es[0].isIntersecting)});io.observe(f);}
+}
+</script>
 </body>
 </html>
